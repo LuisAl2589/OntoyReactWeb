@@ -1,22 +1,35 @@
-const API_URL = "https://reqres.in/api";
-export const login = async (email, password) => {
-    try {
-      const response = await fetch(`${API_URL}/login`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ email, password }),
-      });
-  
-      if (!response.ok) {
-        throw new Error("Error al iniciar sesión");
+import axios from 'axios';
+const API_URL = "http://localhost:3000";
+export const login = async (boleta, password) => {
+  try {
+    const response = await axios.post(`${API_URL}/login`, {
+      boleta,
+      password
+    }, {
+      headers: {
+        "Content-Type": "application/json"
       }
-  
-      const data = await response.json();''
-      return data; // Devuelve el token del usuario
-    } catch (error) {
-      console.error("Error en el inicio de sesión:", error);
-      throw error;
-    }
-  };
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error en el inicio de sesión:", error.response ? error.response.data : error.message);
+    throw error;
+  }
+};
+export const signup = async (registro) => {
+  try {
+    const response = await axios.post(`${API_URL}/signup`, {
+      registro
+    }, {
+      headers: {
+        "Content-Type": "application/json"
+      }
+    });
+
+    return response.data;
+  } catch (error) {
+    console.error("Error al registrar usuario:", error.response ? error.response.data : error.message);
+    throw error;
+  }
+};

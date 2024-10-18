@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './Register.css';
+import { signup } from '../api/auth';
 
 const Register = () => {
     const [formData, setFormData] = useState({
-        username: '',
+        boleta: '',
         email: '',
         password: '',
+        nombre: '',
+        appat: '',
+        apmat: ''
     });
+    
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -14,25 +20,66 @@ const Register = () => {
             ...formData,
             [name]: value,
         });
+        setErrorMessage('');
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        // Handle form submission logic here
-        console.log('Form submitted:', formData);
+        try {
+            const data = await signup(formData);
+            console.log('Usuario registrado:', data);
+            setErrorMessage('');
+        } catch (error) {
+            console.error('Error en el registro', error);
+            setErrorMessage(error.response?.data?.message || 'Error en el registro. Inténtalo de nuevo.');
+        }
     };
 
     return (
         <div className="register-container">
             <h2>Registro</h2>
+            {errorMessage && <p className="error-message">{errorMessage}</p>} {}
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="username">Username:</label>
+                    <label htmlFor="nombre">Nombre:</label>
                     <input
                         type="text"
-                        id="username"
-                        name="username"
-                        value={formData.username}
+                        id="nombre"
+                        name="nombre"
+                        value={formData.nombre}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="appat">Apellido Paterno:</label>
+                    <input
+                        type="text"
+                        id="appat"
+                        name="appat"
+                        value={formData.appat}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="apmat">Apellido Materno:</label>
+                    <input
+                        type="text"
+                        id="apmat"
+                        name="apmat"
+                        value={formData.apmat}
+                        onChange={handleChange}
+                        required
+                    />
+                </div>
+                <div>
+                    <label htmlFor="boleta">Boleta:</label>
+                    <input
+                        type="text"
+                        id="boleta"
+                        name="boleta"
+                        value={formData.boleta}
                         onChange={handleChange}
                         required
                     />

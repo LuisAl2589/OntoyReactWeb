@@ -1,35 +1,39 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { login } from '../api/auth';
 import './Login.css';
 import escudoEscom from '../assets/img/escudoESCOM.png';
 
 const Login = () => {
-    const [email, setEmail] = useState('');
+    const [boleta, setBoleta] = useState('');
     const [password, setPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState(''); // Estado para manejar el mensaje de error
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-    try {
-      const data = await login(email, password);
-      localStorage.setItem('user', JSON.stringify(data));
-      console.log('Usuario logueado:', data);
-    } catch (error) {
-      console.error('Error en el login', error);
-    }
+        try {
+            const data = await login(boleta, password);
+            localStorage.setItem('user', JSON.stringify(data));
+            console.log('Usuario logueado:', data);
+            setErrorMessage(''); // Limpiar el mensaje de error si el login fue exitoso
+        } catch (error) {
+            console.error('Error en el login', error);
+            setErrorMessage(error.response?.data?.message || 'Error en el inicio de sesión. Inténtalo de nuevo.'); // Establecer el mensaje de error
+        }
     };
 
     return (
         <div className='chart-login'>
-            <i id='icon-user' class="fa-solid fa-user-circle"></i>
+            <i id='icon-user' className="fa-solid fa-user-circle"></i>
             <h2>Login</h2>
+            {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Mostrar mensaje de error */}
             <form onSubmit={handleSubmit}>
                 <div>
-                    <label htmlFor="email">Email:</label>
+                    <label htmlFor="boleta">Boleta:</label>
                     <input
-                        type="email"
-                        id="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
+                        type="text"
+                        id="boleta"
+                        value={boleta}
+                        onChange={(e) => setBoleta(e.target.value)}
                         required
                     />
                 </div>

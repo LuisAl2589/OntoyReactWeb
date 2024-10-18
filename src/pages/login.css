@@ -33,7 +33,7 @@
     border-radius: 8px;
 }
 
-.chart-login input[type="email"],
+.chart-login input[type="text"],
 .chart-login input[type="password"] {
     margin-top: 10px;
     margin-bottom: 20px;
