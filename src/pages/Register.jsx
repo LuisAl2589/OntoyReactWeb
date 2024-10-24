@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import './Register.css';
+import './css/register.css';
 import { signup } from '../api/auth';
 
 const Register = () => {

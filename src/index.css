@@ -1,4 +1,15 @@
 body{
-  background-color: rgba(81, 146, 252, 0.915);
+  background-color: #ffffff;
   font-family: Arial, sans-serif;
+  margin: 0;
+}
+
+#root{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-height: fit-content;
+  padding: 0;
+  text-align: center;
 }

@@ -1,4 +1,4 @@
-.chart-login {
+.register-container {
     padding: 30px;
     display: flex;
     flex-direction: column;
@@ -12,13 +12,13 @@
     border-radius: 2rem;
 }
 
-.chart-login h1 {
+.register-container h1 {
     font-size: 2.5rem;
     color: #333;
     margin-bottom: 20px;
 }
 
-.chart-login form {
+.register-container form {
     display: flex;
     flex-direction: column;
     width: 80%;
@@ -33,8 +33,9 @@
     border-radius: 8px;
 }
 
-.chart-login input[type="text"],
-.chart-login input[type="password"] {
+.register-container input[type="text"],
+.register-container input[type="email"],
+.register-container input[type="password"] {
     margin-top: 10px;
     margin-bottom: 20px;
     border: 1px solid #ccc;
@@ -43,7 +44,7 @@
     border-radius: 4px;
 }
 
-.chart-login button {
+.register-container button {
     padding: 10px;
     background-color: #007bff;
     color: #fff;
@@ -54,14 +55,14 @@
     margin-bottom: 20px;
 }
 
-.chart-login button:hover {
+.register-container button:hover {
+    
     background-color: #0056b3;
 }
 
 img{
     width: 120px;
     height: 100px;
-    margin-top: 30px;
 }
 
 #icon-user{
