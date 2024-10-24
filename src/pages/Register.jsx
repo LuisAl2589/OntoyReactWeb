@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { useEffect } from 'react';
+
 import './css/register.css';
 import { signup } from '../api/auth';
 
@@ -34,6 +36,16 @@ const Register = () => {
             setErrorMessage(error.response?.data?.message || 'Error en el registro. Inténtalo de nuevo.');
         }
     };
+
+    useEffect(() => {
+        // Cambia el background cuando el componente se monta
+        document.body.style.backgroundColor = '#35ace4';
+    
+        // Restablece el background al desmontar el componente
+        return () => {
+          document.body.style.backgroundColor = '';
+        };
+      }, []);
 
     return (
         <div className="register-container">

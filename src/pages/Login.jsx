@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import { login } from '../api/auth';
+import { useEffect } from 'react';
+
 import './css/login.css';
 import escudoEscom from '../assets/img/escudoESCOM.png';
 import { useNavigate } from 'react-router-dom';
@@ -26,6 +28,16 @@ const Login = () => {
             setErrorMessage(error.response?.data?.message || 'Error en el inicio de sesión. Inténtalo de nuevo.'); // Establecer el mensaje de error
         }
     };
+
+    useEffect(() => {
+        // Cambia el background cuando el componente se monta
+        document.body.style.backgroundColor = '#35ace4';
+    
+        // Restablece el background al desmontar el componente
+        return () => {
+          document.body.style.backgroundColor = '';
+        };
+      }, []);
 
     return (
         <div className='chart-login'>
