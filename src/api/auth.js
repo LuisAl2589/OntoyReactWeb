@@ -1,4 +1,6 @@
+/* eslint-disable react/prop-types */
 import axios from 'axios';
+import { Navigate, Outlet } from 'react-router-dom';
 const API_URL = "http://localhost:3000";
 export const login = async (boleta, password) => {
   try {
@@ -10,10 +12,9 @@ export const login = async (boleta, password) => {
         "Content-Type": "application/json"
       }
     });
-
     return response.data;
   } catch (error) {
-    console.error("Error en el inicio de sesión:", error.response ? error.response.data : error.message);
+    //console.error("Error en el inicio de sesión:", error.response ? error.response.data : error.message);
     throw error;
   }
 };

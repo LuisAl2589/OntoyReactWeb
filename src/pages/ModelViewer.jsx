@@ -1,7 +1,7 @@
 import React from 'react';
 import { Canvas } from '@react-three/fiber';
 import { useLoader } from '@react-three/fiber';
-import { OBJLoader } from 'three-stdlib';
+import { GLTFLoader } from 'three-stdlib';
 import { Line, OrbitControls } from '@react-three/drei';
 import { Vector3 } from 'three';
 
@@ -25,11 +25,11 @@ function RouteLine() {
 }
 
 function Model() {
-  // Carga el modelo .obj
-  const obj = useLoader(OBJLoader, 'prueba.obj');
+  // Carga el modelo .glb usando GLTFLoader
+  const gltf = useLoader(GLTFLoader, 'Faro.glb');
   
-  // Ajusta la posición o escala según sea necesario
-  return <primitive object={obj} scale={0.5} position={[0, 0, 0]} />;
+  // Retorna el modelo cargado y ajusta la escala o posición si es necesario
+  return <primitive object={gltf.scene} scale={0.5} position={[0, 0, 0]} />;
 }
 
 function ModelViewer() {
@@ -39,7 +39,7 @@ function ModelViewer() {
       <directionalLight position={[5, 5, 5]} />
       <OrbitControls />
 
-      <Model />      {/* Renderiza el modelo */}
+      <Model />      {/* Renderiza el modelo .glb */}
       <RouteLine />  {/* Renderiza la línea sobre el modelo */}
     </Canvas>
   );
