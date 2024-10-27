@@ -7,7 +7,7 @@ import Landing from './pages/Landing';
 import Register from './pages/Register';
 import ModelViewer from './pages/ModelViewer';  // Importa tu componente de visualización de modelos
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import AuthRoute from './components/AuthRoute';
+import { AuthRoute } from './components/AuthRoute';
 
 
 function App() {

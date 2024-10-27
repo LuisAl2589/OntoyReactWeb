@@ -3,7 +3,7 @@ import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
-const AuthRoute = ({ type }) => {
+export const AuthRoute = ({ type }) => {
     const isAuthenticated = Boolean(
         JSON.parse(localStorage.getItem('user'))?.token
     );
@@ -20,5 +20,7 @@ const AuthRoute = ({ type }) => {
 AuthRoute.propTypes = {
     type: PropTypes.oneOf(['protected', 'public']).isRequired,
 };
+export const isLoggedIn = Boolean(
+    JSON.parse(localStorage.getItem('user'))?.token
+);
 
-export default AuthRoute;
