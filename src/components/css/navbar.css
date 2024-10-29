@@ -1,15 +1,18 @@
 
 .header{
     max-width: justify-content;
-    background-color:#183348;
+    background-color:#1b2447;
     padding: 10px;
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  img{
+  .logo img{
     margin-top: 0;
-    max-width:fit-content;
+    margin-left: 10px;
+    max-height: 70px;
+    width: auto;
+    
   }
   a{
     text-decoration: none;

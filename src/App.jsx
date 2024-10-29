@@ -5,8 +5,8 @@ import './App.css'
 import Login from './pages/Login';
 import Landing from './pages/Landing';
 import Register from './pages/Register';
-import ModelViewer from './pages/ModelViewer';  // Importa tu componente de visualización de modelos
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import MapESCOM from './pages/MapESCOM';
 
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/" element={<Landing/>} />
           
-          <Route path="/model" element={<ModelViewer />} />  {/* Nueva ruta para el visualizador */}
+          <Route path="/mapa" element={<MapESCOM />} />  {/* Nueva ruta para el visualizador */}
         </Routes>
       </Router>
     </div>
