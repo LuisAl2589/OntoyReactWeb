@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import axios from 'axios';
 const API_URL = "http://192.168.56.1:3000";
 export const login = async (boleta, password) => {
@@ -10,7 +11,6 @@ export const login = async (boleta, password) => {
         "Content-Type": "application/json"
       }
     });
-
     return response.data;
   } catch (error) {
     console.error("Error en el inicio de sesión:", error.response ? error.response.data : error.message);

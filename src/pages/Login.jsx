@@ -21,7 +21,6 @@ const Login = () => {
             localStorage.setItem('user', JSON.stringify(data));
             console.log('Usuario logueado:', data);
             setErrorMessage(''); // Limpiar el mensaje de error si el login fue exitoso
-            alert('Inicio de sesión exitoso. Redirigiendo...'); // Establecer el mensaje de éxito
             navigate('/');
         } catch (error) {
             console.error('Error en el login', error);
