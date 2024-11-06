@@ -16,7 +16,7 @@ const Nav = () => {
                 <ul>
                     <li><a href="#sobre-mi">Sobre nosotros</a></li>
                     <li><a href="#tecnologias">Servicios</a></li>
-                    <li><a href="#proyectos">Mapa</a></li>
+                    <li><a href="/mapa">Mapa</a></li>
                     <li><a href="#formacion">Contacto</a></li>
                     {!isLoggedIn && (
                         <li><a href="/login">Iniciar Sesión</a></li>
