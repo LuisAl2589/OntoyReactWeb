@@ -5,14 +5,13 @@ import { Line, OrbitControls, Grid } from '@react-three/drei';
 import { useState, useEffect } from 'react';
 import { Vector3 } from 'three';
 import { obtenerNodos } from '../api/nodos';
+import { obtenerAristas } from '../api/aristas';
 import Reloj from '../components/Reloj';
 import Marcador from '../components/Marcador';
-function RouteLine() {
+function RouteLine({nodoOrigen, nodoDestino}) {
   const points = [
-    new Vector3(0, 10, 0),
-    new Vector3(1, 10, 1),
-    new Vector3(3, 10, 0),
-    new Vector3(5, 10, -1)
+    new Vector3(nodoOrigen.coordenadaX, nodoOrigen.coordenadaY, nodoOrigen.coordenadaZ),
+    new Vector3(nodoDestino.coordenadaX, nodoDestino.coordenadaY, nodoDestino.coordenadaZ),
   ];
   return (
     <Line
@@ -51,6 +50,20 @@ function Mapa() {
     fetchNodos();
   }, []);
 
+  const [selectedArista, setSelectedArista] = useState(null);
+  const [aristas, setAristas] = useState([]);
+  useEffect(() => {
+    const fetchAristas = async () => {      
+      try {
+        const data = await obtenerAristas();
+        setAristas(data);
+      } catch (error) {
+        console.error('Error al cargar los nodos', error);
+      }
+    };
+
+    fetchAristas();
+  }, []);
   return (
     <>
       <Canvas 
@@ -88,6 +101,10 @@ function Mapa() {
           infiniteGrid={true}   
           fadeDistance={50}     
         />
+        <mesh rotation={[-Math.PI / 2, 0, 0]} position={[2.25, -2.8, -.75]}>
+          <planeGeometry args={[200, 200]} /> {/* Tamaño del plano */}
+          <meshStandardMaterial color="green" />
+        </mesh>
         <Model />
         {nodos.map((nodo, index) => (
           <Marcador 
@@ -100,10 +117,18 @@ function Mapa() {
             on
           />
         ))}
-
-        <RouteLine />
+        {aristas.map((arista, index) => (
+          <RouteLine 
+            key={index}
+            nodoOrigen={arista.nodoOrigen}
+            nodoDestino={arista.nodoDestino}
+          />
+        ))}
+        
       </Canvas>
       <Reloj />
+      {/* Piso verde */}
+      
       {selectedNode && (
         <div 
           style={{
