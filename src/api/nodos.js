@@ -9,9 +9,6 @@ export const obtenerNodos = async () => {
         "Content-Type": "application/json"
       }
     });
-
-    console.log(response.data.nodos[0]);
-    
     return response.data.nodos;
   } catch (error) {
     console.error("Error al obtener los nodos del mapa:", error.response ? error.response.data : error.message);
