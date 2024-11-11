@@ -23,7 +23,7 @@ const AppNavbar = () => {
                         <Nav.Link href="#" className="mx-3">
                             Servicios
                         </Nav.Link>
-                        <Nav.Link href="#" className="mx-3">
+                        <Nav.Link href="/mapa" className="mx-3">
                             Mapa
                         </Nav.Link>
                         <Nav.Link href="#" className="mx-3">
@@ -31,11 +31,11 @@ const AppNavbar = () => {
                         </Nav.Link>
                     </Nav>
                     <Nav>
-                        <Nav.Link href="#">
-                            <button class="btn btn-primary">Iniciar Sesión</button>
+                        <Nav.Link href="/login">
+                            <button className="btn btn-primary">Iniciar Sesión</button>
                         </Nav.Link>
-                        <Nav.Link href="#">
-                            <button class="btn btn-outline-primary">Registrarse</button>
+                        <Nav.Link href="/Register">
+                            <button className="btn btn-outline-primary">Registrarse</button>
                         </Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

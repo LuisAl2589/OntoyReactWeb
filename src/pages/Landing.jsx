@@ -13,7 +13,7 @@ const Landing = () => {
                 <div className='chart-hero'>
                     <h1>¡Bienvenido a OnToy!</h1>
                     <p>Plataforma para encontrarte o algo asia</p>
-                    <button class="btn btn-primary">Iniciar Sesión</button>
+                    <button className="btn btn-primary">Iniciar Sesión</button>
                 </div>
             </header>
             <Footer />
