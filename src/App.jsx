@@ -5,8 +5,7 @@ import './App.css'
 import Login from './pages/Login';
 import Landing from './pages/Landing';
 import Register from './pages/Register';
-import Perfil from './pages/Perfil';
-import ListaUsuarios from './pages/ListaUsuarios';
+import Mapa from './pages/Mapa';  // Importa tu componente de visualización de modelos
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthRoute } from './components/AuthRoute';
 import MapESCOM from './pages/MapESCOM';
@@ -27,7 +26,7 @@ function App() {
           </Route>
 
           <Route element={<AuthRoute type="protected" />}>
-            <Route path="/perfil" element={< Perfil/>} />
+            <Route path="/mapa" element={<Mapa />} />
           </Route>
 
           <Route path="/" element={<Landing/>}/>

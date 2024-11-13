@@ -29,9 +29,4 @@ export const AuthRoute = ({ type }) => {
 AuthRoute.propTypes = {
     type: PropTypes.oneOf(['protected', 'public','admin']).isRequired,
 };
-export const isLoggedIn = Boolean(
-    JSON.parse(localStorage.getItem('user'))?.token
-);
-
-
-
+export const isLoggedIn = JSON.parse(localStorage.getItem('user'))?.token;

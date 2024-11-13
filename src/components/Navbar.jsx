@@ -1,53 +1,47 @@
 import React from 'react';
 import './css/navbar.css';
-import { isLoggedIn} from './AuthRoute';
-import { useState } from 'react';
-
-
-const Nav = () => {
-
-    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
-    useState(() => {
-        setUser(JSON.parse(localStorage.getItem('user')));
-    }, [user]);
-
-    const handleLogout = () => {
-        localStorage.clear();
-        window.location.href = '/';
-    };
-
+import { isLoggedIn } from './AuthRoute';
+import { Navbar, Nav, NavDropdown, Container, Button, Form, FormControl } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+const AppNavbar = () => {
     return (
-        <header className='header'>
-            <div className='logo'>
-            <img src="/src/assets/img/ontoyLogo.jpeg" alt="Ontoy" />
-            <a href="">OnToy</a>
-            </div>
-            <nav className='navbar'>
-                <input type="checkbox" id='check' />
-                <label htmlFor='check' className='checkbtn'>
-                    <i className="check fa-solid fa-bars"></i>
-                </label>
-                <ul>
-                    <li><a href="#sobre-mi">Sobre nosotros</a></li>
-                    <li><a href="#tecnologias">Servicios</a></li>
-                    <li><a href="#proyectos">Mapa</a></li>
-                    <li><a href="#formacion">Contacto</a></li>
-                    {!isLoggedIn && (
-                        <>
-                            <li><a href="/register">Registrarse</a></li>
-                            <li><a href="/login">Iniciar Sesión</a></li>
-                        </>
-                    )}
-
-                    {isLoggedIn && (
-                            <li><a href='/' onClick={()=>handleLogout()}>Cerrar Sesión</a></li>
-                        )}
-                    
-                </ul>
-                
-            </nav>
-        </header>
+        <Navbar expand="xl" variant='dark' className='navbar'>
+            <Container fluid>
+                <Navbar.Brand href="#">
+                    <img src="/src/assets/img/Logo.svg" alt="Ontoy" height="30" />
+                    OnToy
+                </Navbar.Brand>
+                <Navbar.Toggle aria-controls="navbarSupportedContent" />
+                <Navbar.Collapse id="navbarSupportedContent">
+                    <Nav className='mx-auto flex-grow-0 w-50 justify-content-center'>
+                        <Nav.Link href="#" className="active">
+                            Inicio
+                        </Nav.Link>
+                        <Nav.Link href="#" className="mx-3">
+                            Sobre nosotros
+                        </Nav.Link>
+                        <Nav.Link href="#" className="mx-3">
+                            Servicios
+                        </Nav.Link>
+                        <Nav.Link href="/mapa" className="mx-3">
+                            Mapa
+                        </Nav.Link>
+                        <Nav.Link href="#" className="mx-3">
+                            Contacto
+                        </Nav.Link>
+                    </Nav>
+                    <Nav>
+                        <Nav.Link href="/login">
+                            <button className="btn btn-primary">Iniciar Sesión</button>
+                        </Nav.Link>
+                        <Nav.Link href="/Register">
+                            <button className="btn btn-outline-primary">Registrarse</button>
+                        </Nav.Link>
+                    </Nav>
+                </Navbar.Collapse>
+            </Container>
+        </Navbar>
     );
 }
 
-export default Nav;
+export default AppNavbar;
