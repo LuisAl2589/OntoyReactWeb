@@ -1,7 +1,21 @@
 import React from 'react';
 import './css/navbar.css';
-import { isLoggedIn } from './AuthRoute';
+import { isLoggedIn} from './AuthRoute';
+import { useState } from 'react';
+
+
 const Nav = () => {
+
+    const [user, setUser] = useState(JSON.parse(localStorage.getItem('user')));
+    useState(() => {
+        setUser(JSON.parse(localStorage.getItem('user')));
+    }, [user]);
+
+    const handleLogout = () => {
+        localStorage.clear();
+        window.location.href = '/';
+    };
+
     return (
         <header className='header'>
             <div className='logo'>
@@ -19,8 +33,15 @@ const Nav = () => {
                     <li><a href="#proyectos">Mapa</a></li>
                     <li><a href="#formacion">Contacto</a></li>
                     {!isLoggedIn && (
-                        <li><a href="/login">Iniciar Sesión</a></li>
+                        <>
+                            <li><a href="/register">Registrarse</a></li>
+                            <li><a href="/login">Iniciar Sesión</a></li>
+                        </>
                     )}
+
+                    {isLoggedIn && (
+                            <li><a href='/' onClick={()=>handleLogout()}>Cerrar Sesión</a></li>
+                        )}
                     
                 </ul>
                 

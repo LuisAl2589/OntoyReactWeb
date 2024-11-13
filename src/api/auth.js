@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import axios from 'axios';
 const API_URL = "http://192.168.56.1:3000";
+
 export const login = async (boleta, password) => {
   try {
     const response = await axios.post(`${API_URL}/login`, {
@@ -33,3 +34,4 @@ export const signup = async (registro) => {
     throw error;
   }
 };
+

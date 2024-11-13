@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 import './css/login.css';
 import escudoEscom from '../assets/img/escudoESCOM.png';
+import Modal from '../components/Modal';
 import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
@@ -21,7 +22,10 @@ const Login = () => {
             localStorage.setItem('user', JSON.stringify(data));
             console.log('Usuario logueado:', data);
             setErrorMessage(''); // Limpiar el mensaje de error si el login fue exitoso
-            navigate('/');
+            setLoginMessage('¡Login exitoso!'); // Establecer el mensaje de éxito
+            setTimeout(() => {
+                navigate('/');
+              }, 2500);
         } catch (error) {
             console.error('Error en el login', error);
             setErrorMessage(error.response?.data?.message || 'Error en el inicio de sesión. Inténtalo de nuevo.'); // Establecer el mensaje de error
@@ -39,38 +43,50 @@ const Login = () => {
       }, []);
 
     return (
-        <div className='chart-login'>
-            <i id='icon-user' className="fa-solid fa-user-circle"></i>
-            <h2>OnToy</h2>
-            {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Mostrar mensaje de error */}
-            {loginMessage && <p className="">{loginMessage}</p>} {/* Mostrar mensaje de login exitoso */}
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label htmlFor="boleta">Boleta:</label>
-                    <input
-                        type="text"
-                        id="boleta"
-                        value={boleta}
-                        onChange={(e) => setBoleta(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label htmlFor="password">Password:</label>
-                    <input
-                        type="password"
-                        id="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Login</button>
-                <a href="/register">Registrarse</a>
-            </form>
+
+        <>
+            {loginMessage && 
+            <Modal> 
+                <i class="fa-solid fa-check-circle"></i>
+                <h2>{loginMessage}</h2>
+            </Modal>
+                
+            } {/* Mostrar mensaje de éxito */}
+
+            <div className='chart-login'>
             
-            <img className='escudo-escom' src={escudoEscom} alt="" />
-        </div>
+                <i id='icon-user' className="fa-solid fa-user-circle"></i>
+                <h2>OnToy</h2>
+                
+                {errorMessage && <p className="error-message">{errorMessage}</p>} {/* Mostrar mensaje de error */}
+                <form onSubmit={handleSubmit}>
+                    <div>
+                        <label htmlFor="boleta">Boleta:</label>
+                        <input
+                            type="text"
+                            id="boleta"
+                            value={boleta}
+                            onChange={(e) => setBoleta(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div>
+                        <label htmlFor="password">Password:</label>
+                        <input
+                            type="password"
+                            id="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <button type="submit">Login</button>
+                    <a href="/register">Registrarse</a>
+                </form>
+                
+                <img className='escudo-escom' src={escudoEscom} alt="" />
+            </div>
+        </>
     );
 };
 
