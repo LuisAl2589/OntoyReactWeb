@@ -23,8 +23,8 @@ function RouteLine({nodoOrigen, nodoDestino}) {
   );
 }
 function Model() {
-  const gltf = useLoader(GLTFLoader, 'escuela2.glb');
-  gltf.scene.position.set(0, 0, 0);
+  const gltf = useLoader(GLTFLoader, 'ESCUELA3 - copia - copia.glb');
+  gltf.scene.position.set(-75, -2, -50);
 
   return <primitive object={gltf.scene} scale={0.5} position={[0, 0, 0]} />;
 }
@@ -76,7 +76,6 @@ function Mapa() {
         <pointLight position={[-10, 10, 10]} intensity={0.5} />
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} />
-        
         <OrbitControls
           enablePan={true}
           enableZoom={true}

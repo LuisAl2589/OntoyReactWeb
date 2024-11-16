@@ -33,3 +33,6 @@ export const signup = async (registro) => {
     throw error;
   }
 };
+export const logoutUser = () => {
+  localStorage.removeItem('user');
+};

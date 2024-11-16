@@ -13,14 +13,11 @@ const Login = () => {
     const [loginMessage, setLoginMessage] = useState(''); // Estado para manejar el mensaje de éxito
 
     const navigate = useNavigate();
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const data = await login(boleta, password);
             localStorage.setItem('user', JSON.stringify(data));
-            console.log('Usuario logueado:', data);
-            setErrorMessage(''); // Limpiar el mensaje de error si el login fue exitoso
             navigate('/');
         } catch (error) {
             console.error('Error en el login', error);
