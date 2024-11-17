@@ -1,7 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './css/sidebar.css'; // Estilos adicionales opcionales
-import { Offcanvas, Button } from 'react-bootstrap';
+import { Offcanvas, Button, Navbar } from 'react-bootstrap';
 
 const Sidebar = () => {
   const [show, setShow] = React.useState(false);
@@ -10,16 +10,26 @@ const Sidebar = () => {
   const handleShow = () => setShow(true);
 
   return (
-    <>
-      {/* Botón para abrir el menú */}
-      <Button variant="primary" onClick={handleShow} className="m-3">
-        Abrir Menú
-      </Button>
-
+    <div>
+      <div className='d-flex justify-content-start'>
+        <Button
+          variant="outline-primary"
+          onClick={handleShow}
+          className="m-3"
+        >
+          <div style={{ display: 'flex', flexDirection: 'column', justifyContent: 'space-between', height: '25px' }}>
+            <span style={{ width: '30px', height: '3px', backgroundColor: 'black' }}></span>
+            <span style={{ width: '30px', height: '3px', backgroundColor: 'black' }}></span>
+            <span style={{ width: '30px', height: '3px', backgroundColor: 'black' }}></span>
+          </div>
+        </Button>
+      </div>
       {/* Offcanvas de Bootstrap */}
-      <Offcanvas show={show} onHide={handleClose} placement="end">
+      <Offcanvas show={show} onHide={handleClose} placement="start">
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Menú</Offcanvas.Title>
+          <Offcanvas.Title>
+          <img src="/src/assets/img/Recurso 1.svg" alt="Ontoy" />
+          </Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
           <ul className="list-unstyled">
@@ -41,7 +51,7 @@ const Sidebar = () => {
           </ul>
         </Offcanvas.Body>
       </Offcanvas>
-    </>
+    </div>
   );
 };
 
