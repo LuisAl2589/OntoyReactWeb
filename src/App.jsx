@@ -20,11 +20,6 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
           </Route>
-
-          <Route element={<AuthRoute type="admin" />}>
-            <Route path="/listaUsuarios" element={<ListaUsuarios />} />
-          </Route>
-
           <Route element={<AuthRoute type="protected" />}>
             <Route path="/mapa" element={<Mapa />} />
           </Route>

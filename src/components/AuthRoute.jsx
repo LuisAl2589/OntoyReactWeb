@@ -2,8 +2,6 @@
 import React from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
-import { useEffect } from 'react';
 
 export const AuthRoute = ({ type }) => {
     
