@@ -19,9 +19,8 @@ const AppNavbar = () => {
     return (
     <Navbar expand="xl" variant="dark" className="navbar">
       <Container fluid>
-        <Navbar.Brand href="#">
-          <img src="/src/assets/img/Logo.svg" alt="Ontoy" height="30" />
-          OnToy
+        <Navbar.Brand href="/">
+          <img src="/src/assets/img/Recurso 1.svg" alt="Ontoy" />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="navbarSupportedContent" />
         <Navbar.Collapse id="navbarSupportedContent">

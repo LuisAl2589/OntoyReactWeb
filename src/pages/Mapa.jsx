@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { Vector3 } from 'three';
 import { obtenerNodos } from '../api/nodos';
 import { obtenerAristas } from '../api/aristas';
+import Sidebar from '../components/Sidebar'
 import Reloj from '../components/Reloj';
 import Marcador from '../components/Marcador';
 function RouteLine({nodoOrigen, nodoDestino}) {
@@ -65,7 +66,7 @@ function Mapa() {
     fetchAristas();
   }, []);
   return (
-    <>
+    <div className="w-100 d-flex">
       <Canvas 
         style={{ height: '100vh', width: '100vw' }}
         camera={{ position: [50, 100, 10], fov: 50 }}
@@ -149,7 +150,8 @@ function Mapa() {
           <button onClick={() => setSelectedNode(null)}>Cerrar</button>
         </div>
       )}
-    </>
+      <Sidebar />
+    </div>
   );
 }
 
