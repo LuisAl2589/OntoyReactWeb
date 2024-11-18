@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { Vector3 } from 'three';
 import { obtenerNodos } from '../api/nodos';
 import { obtenerAristas } from '../api/aristas';
+import Sidebar from '../components/Sidebar'
 import Reloj from '../components/Reloj';
 import Marcador from '../components/Marcador';
 function RouteLine({nodoOrigen, nodoDestino}) {
@@ -23,8 +24,8 @@ function RouteLine({nodoOrigen, nodoDestino}) {
   );
 }
 function Model() {
-  const gltf = useLoader(GLTFLoader, 'escuela2.glb');
-  gltf.scene.position.set(0, 0, 0);
+  const gltf = useLoader(GLTFLoader, 'ESCUELA3 - copia - copia.glb');
+  gltf.scene.position.set(-75, -2, -50);
 
   return <primitive object={gltf.scene} scale={0.5} position={[0, 0, 0]} />;
 }
@@ -64,19 +65,24 @@ function Mapa() {
 
     fetchAristas();
   }, []);
+
   return (
-    <>
-      <Canvas 
-        style={{ height: '100vh', width: '100vw' }}
+    <div className="w-100 d-flex flex-column">
+      <Sidebar />
+      <Canvas
+        style={{
+          height: '100vh',
+          width: '100vw',
+        }}
         camera={{ position: [50, 100, 10], fov: 50 }}
       >
+        <color attach="background" args={['#000000']} />
         <ambientLight intensity={0.3} />
         <hemisphereLight skyColor="white" groundColor="lightblue" intensity={0.4} />
         <pointLight position={[10, 10, 10]} intensity={0.5} />
         <pointLight position={[-10, 10, 10]} intensity={0.5} />
         <ambientLight intensity={0.5} />
         <directionalLight position={[5, 5, 5]} />
-        
         <OrbitControls
           enablePan={true}
           enableZoom={true}
@@ -89,17 +95,17 @@ function Mapa() {
           screenSpacePanning={true}
         />
 
-        <Grid 
-          position={[2.25, -2.5, -.75]} 
-          args={[20, 20]}       
-          cellSize={1}          
-          cellThickness={1}     
-          cellColor="gray"      
-          sectionSize={5}       
+        <Grid
+          position={[2.25, -2.5, -.75]}
+          args={[20, 20]}
+          cellSize={1}
+          cellThickness={1}
+          cellColor="gray"
+          sectionSize={5}
           sectionThickness={1.5}
-          sectionColor="black"  
-          infiniteGrid={true}   
-          fadeDistance={50}     
+          sectionColor="black"
+          infiniteGrid={true}
+          fadeDistance={50}
         />
         <mesh rotation={[-Math.PI / 2, 0, 0]} position={[2.25, -2.8, -.75]}>
           <planeGeometry args={[200, 200]} /> {/* Tamaño del plano */}
@@ -107,30 +113,25 @@ function Mapa() {
         </mesh>
         <Model />
         {nodos.map((nodo, index) => (
-          <Marcador 
+          <Marcador
             key={index}
             position={[nodo.coordenadaX, nodo.coordenadaY, nodo.coordenadaZ]}
             color="red"
             radius={1}
             thickness={0.1}
             onClick={() => handleClick(nodo)}
-            on
           />
         ))}
         {aristas.map((arista, index) => (
-          <RouteLine 
+          <RouteLine
             key={index}
             nodoOrigen={arista.nodoOrigen}
             nodoDestino={arista.nodoDestino}
           />
         ))}
-        
       </Canvas>
-      <Reloj />
-      {/* Piso verde */}
-      
       {selectedNode && (
-        <div 
+        <div
           style={{
             position: 'absolute',
             top: '10px',
@@ -140,7 +141,7 @@ function Mapa() {
             border: '1px solid black',
             borderRadius: '8px',
             boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-            zIndex: 1
+            zIndex: 1,
           }}
         >
           <h2>Información del Nodo Seleccionado</h2>
@@ -150,9 +151,8 @@ function Mapa() {
           <button onClick={() => setSelectedNode(null)}>Cerrar</button>
         </div>
       )}
-    </>
+    </div>
   );
 }
-
 
 export default Mapa;

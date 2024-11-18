@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import axios from 'axios';
-const API_URL = "http://localhost:3000";
+const API_URL = "http://192.168.56.1:3000";
+
 export const login = async (boleta, password) => {
   try {
     const response = await axios.post(`${API_URL}/login`, {
@@ -32,4 +33,7 @@ export const signup = async (registro) => {
     console.error("Error al registrar usuario:", error.response ? error.response.data : error.message);
     throw error;
   }
+};
+export const logoutUser = () => {
+  localStorage.removeItem('user');
 };
