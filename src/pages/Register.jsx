@@ -1,10 +1,11 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 import './css/register.css';
 import { signup } from '../api/auth';
 
 const Register = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         boleta: '',
         email: '',
@@ -31,6 +32,7 @@ const Register = () => {
             const data = await signup(formData);
             console.log('Usuario registrado:', data);
             setErrorMessage('');
+            navigate('/');
         } catch (error) {
             console.error('Error en el registro', error);
             setErrorMessage(error.response?.data?.message || 'Error en el registro. Inténtalo de nuevo.');

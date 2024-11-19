@@ -23,9 +23,7 @@ const Login = () => {
             console.log('Usuario logueado:', data);
             setErrorMessage(''); // Limpiar el mensaje de error si el login fue exitoso
             setLoginMessage('¡Login exitoso!'); // Establecer el mensaje de éxito
-            setTimeout(() => {
-                navigate('/');
-              }, 2500);
+            navigate('/');
         } catch (error) {
             console.error('Error en el login', error);
             setErrorMessage(error.response?.data?.message || 'Error en el inicio de sesión. Inténtalo de nuevo.'); // Establecer el mensaje de error
