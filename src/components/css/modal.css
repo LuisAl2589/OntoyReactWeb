@@ -12,8 +12,8 @@
     z-index: 1000;
 }
 
-.modal {
-    position: fixed;
+.modal1 {
+    position:fixed;
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -26,7 +26,7 @@
     box-shadow: inset 0 0 5px #38b000;
 }
 
-.modal-content {
+.modal1-content {
     display: flex;
     flex-direction: column;
     align-items: center;

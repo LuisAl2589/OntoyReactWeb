@@ -1,3 +1,21 @@
 .offcanvas-header{
   background: linear-gradient(135deg, #001F3F, #003366, #004080, #003366, #003366);
 }
+
+.offcanvas-body{
+  color: antiquewhite;
+
+}
+.offcanvas-body li:hover{
+
+  background-color: #0e81f4;
+  color: white;
+  border-radius: 1em;
+  padding: 7px;
+
+  transition: 0.5s;
+
+
+}
+
+
