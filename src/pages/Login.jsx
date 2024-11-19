@@ -23,9 +23,13 @@ const Login = () => {
             console.log('Usuario logueado:', data);
             setErrorMessage(''); // Limpiar el mensaje de error si el login fue exitoso
             setLoginMessage('¡Login exitoso!'); // Establecer el mensaje de éxito
+<<<<<<< HEAD
             setTimeout(() => {
                 navigate('/');
               }, 2500);
+=======
+            navigate('/');
+>>>>>>> c050b3abd0462e494a6ff71ab1800e70b51c6b14
         } catch (error) {
             console.error('Error en el login', error);
             setErrorMessage(error.response?.data?.message || 'Error en el inicio de sesión. Inténtalo de nuevo.'); // Establecer el mensaje de error
@@ -47,7 +51,11 @@ const Login = () => {
         <>
             {loginMessage && 
             <Modal> 
+<<<<<<< HEAD
                 <i className="fa-solid fa-check-circle"></i>
+=======
+                <i class="fa-solid fa-check-circle"></i>
+>>>>>>> c050b3abd0462e494a6ff71ab1800e70b51c6b14
                 <h2>{loginMessage}</h2>
             </Modal>
                 

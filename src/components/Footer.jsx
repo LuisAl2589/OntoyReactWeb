@@ -41,7 +41,7 @@ const Footer = () => {
                                 Descripcion de la empresa que aun no se
                             </p>
                         </div>
-                        <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
                             <h6 className="text-uppercase fw-bold mb-4">
                                 Desarrolladores
                             </h6>
@@ -62,7 +62,7 @@ const Footer = () => {
                             </p>
                         </div>
 
-                        <div className="col-md-4 col-lg-2 col-xl-2 mx-auto mb-4">
+                        <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
                             <h6 className="text-uppercase fw-bold mb-4">
                                 Useful links
                             </h6>
