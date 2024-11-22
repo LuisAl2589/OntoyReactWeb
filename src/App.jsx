@@ -31,7 +31,7 @@ function App() {
 
           <Route path="/" element={<Landing/>}/>
           
-          <Route path="/mapa" element={<MapESCOM />} />  {/* Nueva ruta para el visualizador */}
+          <Route path="/mapas" element={<MapESCOM />} />  {/* Nueva ruta para el visualizador */}
         </Routes>
       </Router>
     </div>

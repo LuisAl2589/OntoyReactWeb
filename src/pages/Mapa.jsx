@@ -1,5 +1,4 @@
-import { Canvas } from '@react-three/fiber';
-import { useLoader } from '@react-three/fiber';
+import { Canvas, useLoader } from '@react-three/fiber';
 import { GLTFLoader } from 'three-stdlib';
 import { Line, OrbitControls, Grid } from '@react-three/drei';
 import { useState, useEffect } from 'react';
@@ -23,7 +22,7 @@ function RouteLine({nodoOrigen, nodoDestino}) {
   );
 }
 function Model() {
-  const gltf = useLoader(GLTFLoader, 'escuela2.glb');
+  const gltf = useLoader(GLTFLoader, 'ESCUELA3 - copia - copia.glb');
   gltf.scene.position.set(0, 0, 0);
 
   return <primitive object={gltf.scene} scale={0.5} position={[0, 0, 0]} />;
