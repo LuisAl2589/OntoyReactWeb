@@ -9,7 +9,6 @@ export const obtenerAristas = async () => {
         "Content-Type": "application/json"
       }
     });
-    console.log(response.data.aristas);
     
     return response.data.aristas;
   } catch (error) {
