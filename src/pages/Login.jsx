@@ -23,6 +23,9 @@ const Login = () => {
             console.log('Usuario logueado:', data);
             setErrorMessage(''); // Limpiar el mensaje de error si el login fue exitoso
             setLoginMessage('¡Login exitoso!'); // Establecer el mensaje de éxito
+            setTimeout(() => {
+                navigate('/');
+              }, 2500);
             navigate('/');
         } catch (error) {
             console.error('Error en el login', error);
@@ -45,6 +48,7 @@ const Login = () => {
         <>
             {loginMessage && 
             <Modal> 
+                <i className="fa-solid fa-check-circle"></i>
                 <i class="fa-solid fa-check-circle"></i>
                 <h2>{loginMessage}</h2>
             </Modal>
