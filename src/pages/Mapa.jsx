@@ -8,6 +8,9 @@ import { obtenerNodos } from '../api/nodos';
 import { obtenerAristas } from '../api/aristas';
 import Reloj from '../components/Reloj';
 import Marcador from '../components/Marcador';
+import Buscador from '../components/Buscador';
+import './css/mapa.css';
+
 function RouteLine({nodoOrigen, nodoDestino}) {
   const points = [
     new Vector3(nodoOrigen.coordenadaX, nodoOrigen.coordenadaY, nodoOrigen.coordenadaZ),
@@ -65,7 +68,10 @@ function Mapa() {
     fetchAristas();
   }, []);
   return (
-    <>
+    <div className='mapa'>
+
+      <Buscador className='buscador'></Buscador>
+
       <Canvas 
         style={{ height: '100vh', width: '100vw' }}
         camera={{ position: [50, 100, 10], fov: 50 }}
@@ -150,7 +156,7 @@ function Mapa() {
           <button onClick={() => setSelectedNode(null)}>Cerrar</button>
         </div>
       )}
-    </>
+    </div>
   );
 }
 
