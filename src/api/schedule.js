@@ -32,7 +32,7 @@ export const fetchClasses = async () => {
 // Registrar un nuevo horario
 export const registerSchedule = async (data) => {
   try {
-    const response = await axios.post(`${API_URL}/horarios`, data, {
+    const response = await axios.post(`${API_URL}/horarios`, {horarios:data}, {
       headers: {
         "Content-Type": "application/json"
       }
