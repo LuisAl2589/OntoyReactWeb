@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   server: {
     host: 'localhost',  // Reemplaza con la IP de tu computadora
-    port: 5173,           // El puerto que quieres usar
+    port: 5174,           // El puerto que quieres usar
     strictPort: true,     // Asegura que el puerto se respete (opcional)
   },
 })
