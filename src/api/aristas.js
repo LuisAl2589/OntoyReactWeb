@@ -1,14 +1,8 @@
-import axios from 'axios';
-
-const API_URL = "http://localhost:3000";
+import api from './api';
 
 export const obtenerAristas = async () => {
   try {
-    const response = await axios.get(`${API_URL}/api/obtenerAristas`, {
-      headers: {
-        "Content-Type": "application/json"
-      }
-    });
+    const response = await api.get('/api/obtenerAristas');
     
     return response.data.aristas;
   } catch (error) {
