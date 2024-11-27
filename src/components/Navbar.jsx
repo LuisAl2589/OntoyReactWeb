@@ -1,6 +1,5 @@
 import React from 'react';
 import './css/navbar.css';
-import { isLoggedIn } from './AuthRoute';
 import { useState } from 'react'
 import { logoutUser } from '../api/auth';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
