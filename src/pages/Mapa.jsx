@@ -1,7 +1,7 @@
-import { Canvas, useLoader } from '@react-three/fiber';
+import { Canvas, useLoader, useFrame } from '@react-three/fiber';
 import { GLTFLoader } from 'three-stdlib';
-import { Line, FirstPersonControls, Grid } from '@react-three/drei';
-import { useState, useEffect } from 'react';
+import { Line, FirstPersonControls, Grid, OrbitControls } from '@react-three/drei';
+import React, { useState, useEffect } from 'react';
 import { Vector3 } from 'three';
 import { obtenerNodos } from '../api/nodos';
 import { obtenerAristas } from '../api/aristas';
@@ -25,11 +25,22 @@ function RouteLine({ nodoOrigen, nodoDestino }) {
   );
 }
 
-function Model() {
-  const gltf = useLoader(GLTFLoader, 'ESCUELA3  V3.glb');
-  gltf.scene.position.set(0, 0, 0);
+function Model({ archivo, posicion, animar }) {
+  const gltf = useLoader(GLTFLoader, archivo);
+  const ref = React.useRef(); // Crear una referencia para el modelo
+  useEffect(() => {
+    if (ref.current) {
+      ref.current.rotation.set(0, Math.PI / 2, 0); // Ajusta la rotación inicial: (x, y, z)
+    }
+  }, []);
+  // Añadir rotación al modelo si "animar" es verdadero
+  useFrame(() => {
+    if (animar && ref.current) {
+      ref.current.rotation.y += 0.01; // Rota en el eje Y
+    }
+  });
 
-  return <primitive object={gltf.scene} scale={3} position={[0, 0, 0]} />;
+  return <primitive ref={ref} object={gltf.scene} scale={0.5} position={posicion} />;
 }
 
 function Mapa() {
@@ -73,7 +84,7 @@ function Mapa() {
       <Buscador className="buscador"></Buscador>
 
       <Canvas
-  style={{ height: '100vh', width: '100vw', backgroundColor: 'rgba(255,2,255' }}
+  style={{ height: '100vh', width: '100vw', backgroundColor: 'rgba(0,0,0' }}
   // Posición inicial de la cámara: ligeramente por encima del suelo, como la perspectiva de un jugador
   camera={{ position: [-10, 150, 0], fov: 50 }}
 >
@@ -82,14 +93,14 @@ function Mapa() {
   <directionalLight position={[5, 5, 5]} />
   <directionalLight position={[-5, -5, -5]} />
   {/* Configuración de FirstPersonControls */}
-  <FirstPersonControls
+  {/* <FirstPersonControls
     lookSpeed={0.1} // Velocidad del movimiento al mirar
     movementSpeed={50} // Velocidad al moverse
     rollSpeed={0.5} // Velocidad al rotar
     autoForward={false} // Evita moverse automáticamente
     dragToLook={true} // Permite mirar sin arrastrar
-  />
-
+  /> */}
+  <OrbitControls enableDamping dampingFactor={0.1} />
   {/* Grilla para orientación */}
   <Grid
     position={[0, -0.01, 0]}
@@ -111,7 +122,8 @@ function Mapa() {
   </mesh>
 
   {/* Modelo y Marcadores */}
-  <Model />
+  <Model archivo={'ESCUELA3  V3.glb'} posicion={[0,0,0]}/>
+  <Model archivo={'logo.glb'} posicion={[20,20,0]} animar={true}/>
   {nodos.map((nodo, index) => (
     <Marcador
       key={index}
