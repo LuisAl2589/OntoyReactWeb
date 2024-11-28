@@ -48,7 +48,6 @@ const Login = () => {
             {loginMessage && 
             <Modal> 
                 <i className="fa-solid fa-check-circle"></i>
-                <i class="fa-solid fa-check-circle"></i>
                 <h2>{loginMessage}</h2>
             </Modal>
                 

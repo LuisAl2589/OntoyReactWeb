@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
-import { Button,Form , InputGroup} from 'react-bootstrap';
+import { Button,Form , InputGroup,Dropdown} from 'react-bootstrap';
 import './css/buscador.css';
+import { buscar } from '../api/busqueda';
 
-
-const Buscador = ({ onSearch }) => {
+const Buscador = () => {
     const [query, setQuery] = useState('');
+
+
 
     const handleInputChange = (e) => {
         setQuery(e.target.value);
     };
 
-    const handleSearch = () => {
-        onSearch(query);
+    const handleSearch = async(e) => {
+        e.preventDefault();
+        try {
+            const data = await buscar(query);
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -25,10 +32,31 @@ const Buscador = ({ onSearch }) => {
                     value={query}
 
                 />
-                <Button onClick={handleSearch} variant="outline-primary" id="button-addon1">
+                
                     <i className="fa-solid fa-magnifying-glass"></i>
-                </Button>
             </InputGroup>
+                <Dropdown.Menu show style={{ width: '100%' }}>
+                    
+                    <Dropdown.Item
+                        key={1}
+                        
+                        >
+                        Opcion 1
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                        key={2}
+                       
+                        >
+                        Opcion 2
+                    </Dropdown.Item>
+                    <Dropdown.Item
+                        key={3}
+                       
+                        >
+                        Opcion 3
+                    </Dropdown.Item>
+              
+                </Dropdown.Menu>    
         </div>
     );
 };
