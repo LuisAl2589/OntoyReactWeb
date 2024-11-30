@@ -1,19 +1,33 @@
-import { Canvas, useLoader, useFrame } from '@react-three/fiber';
-import { GLTFLoader } from 'three-stdlib';
-import React, { useEffect } from 'react';
-export function Modelo({ archivo, posicion, animar }) {
-    const gltf = useLoader(GLTFLoader, archivo);
-    const ref = React.useRef(); // Crear una referencia para el modelo
+import { useGLTF } from '@react-three/drei';
+import { useRef, useEffect, useState } from 'react';
+import { useFrame } from '@react-three/fiber';
+
+export function Modelo({ archivo, posicion = [0, 0, 0], animar = false }) {
+    const { scene } = useGLTF(archivo);
+    const ref = useRef();
+    const clonedScene = useRef();
+    const [isReady, setIsReady] = useState(false);
+
     useEffect(() => {
-      if (ref.current) {
-        ref.current.rotation.set(0, Math.PI / 2, 0);
-      }
-    }, []);
+        if (scene && !clonedScene.current) {
+            clonedScene.current = scene.clone();  
+            setIsReady(true);
+        }
+    }, [scene]);
+
+    useEffect(() => {
+        if (isReady && clonedScene.current) {
+            clonedScene.current.rotation.set(0, Math.PI / 2, 0); 
+        }
+    }, [isReady]);
+
     useFrame(() => {
-      if (animar && ref.current) {
-        ref.current.rotation.y += 0.01;
-      }
+        if (animar && clonedScene.current) {
+            clonedScene.current.rotation.y += 0.01; 
+        }
     });
-  
-    return <primitive ref={ref} object={gltf.scene} scale={0.5*2} position={posicion} />;
+
+    return isReady ? (
+        <primitive ref={ref} object={clonedScene.current} position={posicion} />
+    ) : null;
 }

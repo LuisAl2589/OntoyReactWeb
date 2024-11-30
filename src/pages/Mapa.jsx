@@ -104,7 +104,7 @@ function Mapa() {
   </mesh>
   {/* Modelo y Marcadores */}
   <Modelo archivo={'ESCUELA3  V3.glb'} posicion={[0,0,0]}/>
-  <Modelo archivo={'logo.glb'} posicion={[20,20,0]} animar={true}/>
+  <Modelo archivo={'logo.glb'} posicion={[30,20,0]} animar={true}/>
   {nodos.map((nodo, index) => (
     <Marcador
       key={index}
@@ -116,7 +116,7 @@ function Mapa() {
     />
   ))}
   <Marcador
-      position={[79, 19.2, -105]}
+      position={[362, 19.2, -105]}
       color="red"
       radius={1}
       thickness={0.1}
