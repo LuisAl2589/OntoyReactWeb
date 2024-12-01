@@ -143,7 +143,7 @@ function Mapa() {
   ))}
 </Canvas>
 
-      <Reloj />
+      <Reloj className='reloj' />
 
       {selectedNode && (
         <div
