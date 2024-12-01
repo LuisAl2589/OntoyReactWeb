@@ -1,15 +1,16 @@
-import { Canvas, useLoader, useFrame } from '@react-three/fiber';
-import { GLTFLoader } from 'three-stdlib';
+import { Canvas} from '@react-three/fiber';
 import { Line, FirstPersonControls, Grid, OrbitControls } from '@react-three/drei';
+import { Modelo } from '../components/mapa/Modelo'
 import React, { useState, useEffect } from 'react';
 import { Vector3 } from 'three';
 import { obtenerNodos } from '../api/nodos';
 import { obtenerAristas } from '../api/aristas';
-import Reloj from '../components/Reloj';
-import Marcador from '../components/Marcador';
+import Reloj from '../components/mapa/Reloj';
+import Marcador from '../components/mapa/Marcador';
 import Buscador from '../components/Buscador';
 import './css/mapa.css';
 
+const scale = 2;
 function RouteLine({ nodoOrigen, nodoDestino }) {
   const points = [
     new Vector3(nodoOrigen.coordenadaX, nodoOrigen.coordenadaY, nodoOrigen.coordenadaZ),
@@ -20,29 +21,10 @@ function RouteLine({ nodoOrigen, nodoDestino }) {
       points={points}
       color="blue"
       lineWidth={3}
-      dashed={false}
+      dashed={true}
     />
   );
 }
-
-function Model({ archivo, posicion, animar }) {
-  const gltf = useLoader(GLTFLoader, archivo);
-  const ref = React.useRef(); // Crear una referencia para el modelo
-  useEffect(() => {
-    if (ref.current) {
-      ref.current.rotation.set(0, Math.PI / 2, 0); // Ajusta la rotación inicial: (x, y, z)
-    }
-  }, []);
-  // Añadir rotación al modelo si "animar" es verdadero
-  useFrame(() => {
-    if (animar && ref.current) {
-      ref.current.rotation.y += 0.01; // Rota en el eje Y
-    }
-  });
-
-  return <primitive ref={ref} object={gltf.scene} scale={0.5} position={posicion} />;
-}
-
 function Mapa() {
   const [selectedNode, setSelectedNode] = useState(null);
   const [nodos, setNodos] = useState([]);
@@ -103,7 +85,7 @@ function Mapa() {
   <OrbitControls enableDamping dampingFactor={0.1} />
   {/* Grilla para orientación */}
   <Grid
-    position={[0, -0.01, 0]}
+    position={[0, 0.01, 0]}
     args={[20, 20]}
     cellSize={1}
     cellThickness={1}
@@ -117,13 +99,12 @@ function Mapa() {
 
   {/* Piso */}
   <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]}>
-    <planeGeometry args={[200, 200]} />
+    <planeGeometry args={[2000, 2000]} /> {/* Aumentamos el tamaño */}
     <meshStandardMaterial color="green" />
   </mesh>
-
   {/* Modelo y Marcadores */}
-  <Model archivo={'ESCUELA3  V3.glb'} posicion={[0,0,0]}/>
-  <Model archivo={'logo.glb'} posicion={[20,20,0]} animar={true}/>
+  <Modelo archivo={'ESCUELA3  V3.glb'} posicion={[0,0,0]}/>
+  <Modelo archivo={'logo.glb'} posicion={[30,20,0]} animar={true}/>
   {nodos.map((nodo, index) => (
     <Marcador
       key={index}
@@ -134,6 +115,13 @@ function Mapa() {
       onClick={() => handleClick(nodo)}
     />
   ))}
+  <Marcador
+      position={[362, 19.2, -105]}
+      color="red"
+      radius={1}
+      thickness={0.1}
+      onClick={() => handleClick(nodo)}
+  />
   {aristas.map((arista, index) => (
     <RouteLine
       key={index}
@@ -163,6 +151,7 @@ function Mapa() {
           <p>Coordenadas: ({selectedNode.coordenadaX}, {selectedNode.coordenadaY}, {selectedNode.coordenadaZ})</p>
           <p>Numero: {selectedNode.nombre}</p>
           <p>Tipo: {selectedNode.tipo}</p>
+          <p>Id: {selectedNode.id}</p>
           <button onClick={() => setSelectedNode(null)}>Cerrar</button>
         </div>
       )}
