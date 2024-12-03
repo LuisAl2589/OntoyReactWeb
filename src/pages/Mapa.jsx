@@ -8,6 +8,7 @@ import { obtenerAristas } from '../api/aristas';
 import Reloj from '../components/mapa/Reloj';
 import Marcador from '../components/mapa/Marcador';
 import Buscador from '../components/Buscador';
+import { Modal, Button } from 'react-bootstrap';
 import './css/mapa.css';
 
 const scale = 2;
@@ -25,9 +26,23 @@ function RouteLine({ nodoOrigen, nodoDestino }) {
     />
   );
 }
+
+function NodoBuscado({coordenadaX, coordenadaY, coordenadaZ}) {
+  return (
+    <Modelo archivo={'logo.glb'} posicion={[coordenadaX,coordenadaY,coordenadaZ]} animar={true}/>
+  );
+
+}
+
+
 function Mapa() {
   const [selectedNode, setSelectedNode] = useState(null);
   const [nodos, setNodos] = useState([]);
+  const [salonBuscado, setSalonBuscado] = useState(null);
+
+  const handleSalonBuscado = (salon) => {
+    setSalonBuscado(salon); // Actualiza el estado con el salón seleccionado
+  };
 
   const handleClick = (nodo) => {
     setSelectedNode(nodo);
@@ -63,7 +78,8 @@ function Mapa() {
 
   return (
     <div className="mapa">
-      <Buscador className="buscador"></Buscador>
+
+      <Buscador handleFunction={handleSalonBuscado} className="buscador"></Buscador>
 
       <Canvas
   style={{ height: '100vh', width: '100vw', backgroundColor: 'rgba(0,0,0' }}
@@ -100,11 +116,17 @@ function Mapa() {
   {/* Piso */}
   <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]}>
     <planeGeometry args={[2000, 2000]} /> {/* Aumentamos el tamaño */}
-    <meshStandardMaterial color="green" />
+    <meshStandardMaterial color="white" />
   </mesh>
   {/* Modelo y Marcadores */}
   <Modelo archivo={'ESCUELA3  V3.glb'} posicion={[0,0,0]}/>
-  <Modelo archivo={'logo.glb'} posicion={[20,20,0]} animar={true}/>
+
+    {salonBuscado && (
+      <Modelo archivo={'logo.glb'} posicion={[salonBuscado.coordenadaX,salonBuscado.coordenadaY +2.5,salonBuscado.coordenadaZ]} animar={true}/>
+      )}
+
+  
+
   {nodos.map((nodo, index) => (
     <Marcador
       key={index}
@@ -116,7 +138,7 @@ function Mapa() {
     />
   ))}
   <Marcador
-      position={[79, 19.2, -105]}
+      position={[362, 19.2, -105]}
       color="red"
       radius={1}
       thickness={0.1}
@@ -130,28 +152,26 @@ function Mapa() {
     />
   ))}
 </Canvas>
-      <Reloj />
+
+      <Reloj className='reloj' />
+
       {selectedNode && (
-        <div
-          style={{
-            position: 'absolute',
-            top: '10px',
-            left: '10px',
-            padding: '20px',
-            backgroundColor: 'white',
-            border: '1px solid black',
-            borderRadius: '8px',
-            boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-            zIndex: 1,
-          }}
-        >
-          <h2>Información del Nodo Seleccionado</h2>
-          <p>Coordenadas: ({selectedNode.coordenadaX}, {selectedNode.coordenadaY}, {selectedNode.coordenadaZ})</p>
-          <p>Numero: {selectedNode.nombre}</p>
-          <p>Tipo: {selectedNode.tipo}</p>
-          <p>Id: {selectedNode.id}</p>
-          <button onClick={() => setSelectedNode(null)}>Cerrar</button>
-        </div>
+          <Modal show='true' onHide='false'>
+            <Modal.Header>
+              <Modal.Title>Información del Nodo Seleccionado</Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+              <p>Coordenadas: ({selectedNode.coordenadaX}, {selectedNode.coordenadaY}, {selectedNode.coordenadaZ})</p>
+              <p>Numero: {selectedNode.nombre}</p>
+              <p>Tipo: {selectedNode.tipo}</p>
+              <p>Id: {selectedNode.id}</p>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="primary" onClick={() => setSelectedNode(null)}>
+                Cerrar
+              </Button>
+            </Modal.Footer>
+          </Modal>
       )}
     </div>
   );

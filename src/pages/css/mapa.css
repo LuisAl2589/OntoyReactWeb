@@ -5,6 +5,12 @@
 }
 
 .buscador{
-    width: 50%;
+    position: fixed;
+    width: 20%;
+    z-index: 1;
     
+}
+
+.reloj{
+    position: fixed;
 }

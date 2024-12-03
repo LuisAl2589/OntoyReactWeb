@@ -1,34 +1,56 @@
-import React, { useState } from 'react';
-import { Button,Form , InputGroup} from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import { Button,Form , InputGroup,Dropdown} from 'react-bootstrap';
 import './css/buscador.css';
+import { buscarSalon } from '../api/busqueda';
 
-
-const Buscador = ({ onSearch }) => {
+const Buscador = ({handleFunction}) => {
     const [query, setQuery] = useState('');
+    const [resultados, setResultados] = useState([]);
+    
+    
+    
+    useEffect(() => {
+        const buscar = async (query) => {
+            if (query === '') {
+                setResultados([]);
+                return;
+            }
+            try {
+                const response = await buscarSalon(query);
+                setResultados(response.data);
+            } catch (error) {
+                console.error(error);
+            }
+        };
+        buscar(query);
+    }, [query]);
 
     const handleInputChange = (e) => {
         setQuery(e.target.value);
     };
 
-    const handleSearch = () => {
-        onSearch(query);
+    const handleSelect = (resultado) => {
+            handleFunction(resultado); // Llama la función del componente padre
+        
     };
+
 
     return (
         <div className='buscador'>
-            <InputGroup className="mb-3">
-                <Form.Control
-                    aria-label="Example text with button addon"
-                    aria-describedby="basic-addon1"
-                    placeholder="Buscar..."
-                    onChange={handleInputChange} 
-                    value={query}
-
-                />
-                <Button onClick={handleSearch} variant="outline-primary" id="button-addon1">
-                    <i className="fa-solid fa-magnifying-glass"></i>
-                </Button>
-            </InputGroup>
+            
+            <Dropdown.Menu variant='dark' show>
+                <Dropdown.Header>
+                    <Form.Control type="text" placeholder="Buscar salón..." value={query} onChange={handleInputChange} />
+                </Dropdown.Header>
+                {(resultados.length > 0) && (
+                    resultados.map((resultado) => (
+                        <Dropdown.Item key={resultado.nodo_nombre} onClick={() => handleSelect(resultado)}>
+                            {resultado.nodo_nombre}
+                        </Dropdown.Item>
+                    ))
+                )}
+                
+            </Dropdown.Menu>
         </div>
     );
 };
