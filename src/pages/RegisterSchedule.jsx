@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
-import './css/register.css';
+import './css/horario.css';
 import { registerSchedule, fetchClasses } from '../api/schedule';
+import { obtenerNodos } from '../api/nodos';
 
 const RegisterSchedule = () => {
     const [formData, setFormData] = useState({
@@ -8,14 +9,24 @@ const RegisterSchedule = () => {
         hora_inicio: '',
         hora_fin: '',
         id_clase: '',
-        id_nodo: 1, // Aquí se puede poner el id del nodo, dependiendo de cómo lo manejes en el back-end.
+        id_nodo: '', // Aquí se puede poner el id del nodo, dependiendo de cómo lo manejes en el back-end.
     });
 
     const [errorMessage, setErrorMessage] = useState('');
     const [classes, setClasses] = useState([]);
+    const [ nodos, setNodos] = useState([]);
 
     useEffect(() => {
         // Cargar clases disponibles
+        const fetchNodos = async() => {
+            try {
+                const response = await obtenerNodos();
+                setNodos(response);
+            } catch (error) {
+                console.error("Error al cargar las nodos", error);
+                setErrorMessage("No se pudieron cargar las Nodos");
+            }
+        };
         const loadClasses = async () => {
             try {
                 const response = await fetchClasses();
@@ -25,6 +36,7 @@ const RegisterSchedule = () => {
                 setErrorMessage("No se pudieron cargar las clases");
             }
         };
+        fetchNodos();
         loadClasses();
     }, []);
 
@@ -108,6 +120,23 @@ const RegisterSchedule = () => {
                         {classes.map((clase) => (
                             <option key={clase.id} value={clase.id}>
                                 {clase.nombre} - {clase.profesor}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                <div>
+                    <label htmlFor="id_nodo">Nodo:</label>
+                    <select
+                        id="id_nodo"
+                        name="id_nodo"
+                        value={formData.id_nodo}
+                        onChange={handleChange}
+                        required
+                    >
+                        <option value="">Selecciona un nodo</option>
+                        {nodos.map((nodo) => (
+                            <option key={nodo.id} value={nodo.id}>
+                                {nodo.nombre}
                             </option>
                         ))}
                     </select>
