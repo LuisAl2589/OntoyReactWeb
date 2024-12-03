@@ -12,8 +12,10 @@
   "dependencies": {
     "@react-three/drei": "^9.114.6",
     "@react-three/fiber": "^8.17.10",
+    "@react-three/rapier": "^1.5.0",
     "axios": "^1.7.7",
     "bootstrap": "^5.3.3",
+    "jwt-decode": "^4.0.0",
     "ontoyreactweb": "file:",
     "react": "^18.3.1",
     "react-bootstrap": "^2.10.5",

@@ -11,6 +11,9 @@ import Mapa from './pages/Mapa';  // Importa tu componente de visualización de 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthRoute } from './components/AuthRoute';
 import MapESCOM from './pages/MapESCOM';
+import AdminPanel from './pages/panelAdmin';
+import ListaUsuarios from './pages/ListaUsuarios';
+import EditarUsuario from './pages/EditarUsuario';
 
 
 function App() {
@@ -27,11 +30,14 @@ function App() {
             <Route path="/mapa" element={<Mapa />} />
             <Route path="/register-class" element={<RegisterClass />} /> 
             <Route path="/register-schedule" element={<RegisterSchedule />} /> 
+            <Route path="/admin" element={<AdminPanel />} /> 
+            <Route path="/admin/listaUsuarios" element={<ListaUsuarios />} /> 
+            <Route path="/admin/editarUsuario/:boleta" element={<EditarUsuario />} /> 
           </Route>
 
           <Route path="/" element={<Landing/>}/>
           
-          <Route path="/mapa" element={<MapESCOM />} />  {/* Nueva ruta para el visualizador */}
+          <Route path="/mapas" element={<MapESCOM />} />  {/* Nueva ruta para el visualizador */}
         </Routes>
       </Router>
     </div>

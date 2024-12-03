@@ -31,7 +31,7 @@ const Register = () => {
         try {
             const data = await signup(formData);
             localStorage.setItem('user', JSON.stringify(data));
-            console.log('Usuario registrado:', data);
+            //console.log('Usuario registrado:', data);
             setErrorMessage('');
             navigate('/');
         } catch (error) {

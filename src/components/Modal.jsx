@@ -4,7 +4,7 @@ import { div } from 'three/webgpu';
 
 const Modal = ({children }) => {
     return (
-        <div className="modal-overlay">
+        <div className="modal1-overlay">
             <div className="modal1">
                 <div className="modal1-content">
                     {children}
