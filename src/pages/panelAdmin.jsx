@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppNavbar from '../components/Navbar';
+import './css/adminPanel.css';
+
 const AdminPanel = () => {
     const navigate = useNavigate();
     const [activeSection, setActiveSection] = useState('dashboard');
@@ -15,19 +17,19 @@ const AdminPanel = () => {
                 <h2>Admin Panel</h2>
                 <ul style={{ listStyle: 'none', padding: 0 }}>
                     <li
-                        style={{ padding: '10px', cursor: 'pointer', background: activeSection === 'dashboard' ? '#34495e' : 'none' }}
+                        style={{ padding: '10px', cursor: 'pointer', background: activeSection === 'dashboard' ? '#0056b3' : 'none' }}
                         onClick={() => handleNavigation('dashboard')}
                     >
                         Dashboard
                     </li>
                     <li
-                        style={{ padding: '10px', cursor: 'pointer', background: activeSection === 'users' ? '#34495e' : 'none' }}
+                        style={{ padding: '10px', cursor: 'pointer', background: activeSection === 'users' ? '#0056b3' : 'none' }}
                         onClick={() => handleNavigation('users')}
                     >
                         Manage Users
                     </li>
                     <li
-                        style={{ padding: '10px', cursor: 'pointer', background: activeSection === 'settings' ? '#34495e' : 'none' }}
+                        style={{ padding: '10px', cursor: 'pointer', background: activeSection === 'settings' ? '#0056b3' : 'none' }}
                         onClick={() => handleNavigation('settings')}
                     >
                         Settings
