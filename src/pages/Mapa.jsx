@@ -5,14 +5,18 @@ import React, { useState, useEffect } from 'react';
 import { Vector3 } from 'three';
 import { obtenerNodos } from '../api/nodos';
 import { obtenerAristas } from '../api/aristas';
+import { obtenerRuta } from '../api/rutas';
 import Reloj from '../components/mapa/Reloj';
 import Marcador from '../components/mapa/Marcador';
 import Buscador from '../components/Buscador';
+import RouteLine from '../components/mapa/RouteLine';
 import { Modal, Button } from 'react-bootstrap';
 import './css/mapa.css';
 
 const scale = 2;
-function RouteLine({ nodoOrigen, nodoDestino }) {
+function Aristas({ nodoOrigen, nodoDestino }) {
+  console.log(nodoOrigen, nodoDestino);
+  
   const points = [
     new Vector3(nodoOrigen.coordenadaX, nodoOrigen.coordenadaY, nodoOrigen.coordenadaZ),
     new Vector3(nodoDestino.coordenadaX, nodoDestino.coordenadaY, nodoDestino.coordenadaZ),
@@ -26,7 +30,12 @@ function RouteLine({ nodoOrigen, nodoDestino }) {
     />
   );
 }
-
+function RutaArista({ ruta }) {
+  console.log(ruta);
+  return (
+    <div/>
+  );
+}
 function NodoBuscado({coordenadaX, coordenadaY, coordenadaZ}) {
   return (
     <Modelo archivo={'logo.glb'} posicion={[coordenadaX,coordenadaY,coordenadaZ]} animar={true}/>
@@ -39,7 +48,6 @@ function Mapa() {
   const [selectedNode, setSelectedNode] = useState(null);
   const [nodos, setNodos] = useState([]);
   const [salonBuscado, setSalonBuscado] = useState(null);
-
   const handleSalonBuscado = (salon) => {
     setSalonBuscado(salon); // Actualiza el estado con el salón seleccionado
   };
@@ -75,7 +83,17 @@ function Mapa() {
 
     fetchAristas();
   }, []);
+  const [ruta, setRuta] = useState([]);
+  useEffect(() => {
+    const fetchRuta = async () => {
+        const nodoOrigen = 7;
+        const nodoDestino = 8;
+        const data = await obtenerRuta(nodoOrigen, nodoDestino);  
+        setRuta(data.ruta); 
+    };
 
+    fetchRuta();
+}, []);
   return (
     <div className="mapa">
 
@@ -85,7 +103,18 @@ function Mapa() {
   style={{ height: '100vh', width: '100vw', backgroundColor: 'rgba(0,0,0' }}
   // Posición inicial de la cámara: ligeramente por encima del suelo, como la perspectiva de un jugador
   camera={{ position: [-10, 150, 0], fov: 50 }}
->
+> 
+  {nodos.map((nodo, index) => (
+    <Marcador
+      key={index}
+      position={[nodo.coordenadaX, nodo.coordenadaY, nodo.coordenadaZ]}
+      color="red"
+      radius={1}
+      thickness={0.1}
+      onClick={() => handleClick(nodo)}
+    />
+  ))}
+
   {/* Luces para iluminar la escena */}
   <ambientLight intensity={0.3} />
   <directionalLight position={[5, 5, 5]} />
@@ -98,10 +127,20 @@ function Mapa() {
     autoForward={false} // Evita moverse automáticamente
     dragToLook={true} // Permite mirar sin arrastrar
   /> */}
-  <OrbitControls enableDamping dampingFactor={0.1} />
+    <OrbitControls 
+    enableDamping 
+    dampingFactor={0.1} 
+    minDistance={0}       // Quitar límite inferior de zoom
+    maxDistance={Infinity} // Quitar límite superior de zoom
+    enableZoom={true}     // Permitir zoom
+    enablePan={true}      // Permitir mover la cámara
+    enableRotate={true}   // Permitir rotación de la cámara
+
+  />
+
   {/* Grilla para orientación */}
   <Grid
-    position={[0, 0.01, 0]}
+    position={[0, 0.03, 0]}
     args={[20, 20]}
     cellSize={1}
     cellThickness={1}
@@ -112,14 +151,17 @@ function Mapa() {
     infiniteGrid={true}
     fadeDistance={50}
   />
-
   {/* Piso */}
-  <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.01, 0]}>
-    <planeGeometry args={[2000, 2000]} /> {/* Aumentamos el tamaño */}
-    <meshStandardMaterial color="white" />
-  </mesh>
+  <Marcador
+      position={[30.5,0,105]}
+      color="red"
+      radius={1}
+      thickness={0.1}
+      onClick={() => handleClick(nodo)}
+  />
+  
   {/* Modelo y Marcadores */}
-  <Modelo archivo={'ESCUELA3  V3.glb'} posicion={[0,0,0]}/>
+  <Modelo archivo={'EscuelaColor.glb'} posicion={[0,0,0]}/>
 
     {salonBuscado && (
       <Modelo archivo={'logo.glb'} posicion={[salonBuscado.coordenadaX,salonBuscado.coordenadaY +2.5,salonBuscado.coordenadaZ]} animar={true}/>
@@ -127,16 +169,6 @@ function Mapa() {
 
   
 
-  {nodos.map((nodo, index) => (
-    <Marcador
-      key={index}
-      position={[nodo.coordenadaX, nodo.coordenadaY, nodo.coordenadaZ]}
-      color="red"
-      radius={1}
-      thickness={0.1}
-      onClick={() => handleClick(nodo)}
-    />
-  ))}
   <Marcador
       position={[362, 19.2, -105]}
       color="red"
@@ -144,13 +176,14 @@ function Mapa() {
       thickness={0.1}
       onClick={() => handleClick(nodo)}
   />
-  {aristas.map((arista, index) => (
-    <RouteLine
+{/*   {aristas.map((arista, index) => (
+    <Aristas
       key={index}
       nodoOrigen={arista.nodoOrigen}
       nodoDestino={arista.nodoDestino}
     />
-  ))}
+  ))} */}
+
 </Canvas>
 
       <Reloj className='reloj' />

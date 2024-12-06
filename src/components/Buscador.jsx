@@ -8,7 +8,7 @@ const Buscador = ({handleFunction}) => {
     const [resultados, setResultados] = useState([]);
     
     
-    
+
     useEffect(() => {
         const buscar = async (query) => {
             if (query === '') {
@@ -18,6 +18,8 @@ const Buscador = ({handleFunction}) => {
             try {
                 const response = await buscarSalon(query);
                 setResultados(response.data);
+                console.log(response.data);
+                
             } catch (error) {
                 console.error(error);
             }
