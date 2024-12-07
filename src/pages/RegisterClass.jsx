@@ -10,6 +10,7 @@ const RegisterClass = () => {
     });
 
     const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -18,17 +19,27 @@ const RegisterClass = () => {
             [name]: value,
         });
         setErrorMessage('');
+        setSuccessMessage('');
+        
     };
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
             const data = await registerClass(formData);
-            console.log('Clase registrada:', data);
+            setSuccessMessage('Clase registrada con éxito.');
             setErrorMessage('');
+            setFormData({ nombre: '', profesor: '' });
+            console.log('Clase registrada:', data);
         } catch (error) {
-            console.error('Error al registrar la clase', error);
-            setErrorMessage(error.response?.data?.message || 'Error al registrar la clase. Inténtalo de nuevo.');
+            if (error.response?.status === 400) {
+                setErrorMessage(error.response.data.message || 'La clase ya existe.');
+            } else {
+                setErrorMessage('Error al registrar la clase. Inténtalo nuevamente.');
+            }
+            console.error('Error al registrar la clase:', error);
+
         }
     };
 
