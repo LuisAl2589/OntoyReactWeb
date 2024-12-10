@@ -65,7 +65,7 @@ const Mapa = () => {
         style={{ height: '100vh', width: '100vw', backgroundColor: 'rgba(0,0,0)' }}
         camera={{ position: [-10, 150, 0], fov: 50 }}
       >
-        {/* {nodos.map((nodo, index) => (
+        {nodos.map((nodo, index) => (
           <Marcador
             key={index}
             position={[nodo.coordenadaX, nodo.coordenadaY, nodo.coordenadaZ]}
@@ -74,7 +74,7 @@ const Mapa = () => {
             thickness={0.1}
             onClick={() => handleClick(nodo)}
           />
-        ))} */}
+        ))}
 
         {/* Luces para iluminar la escena */}
         <ambientLight intensity={0.3} />
@@ -90,13 +90,13 @@ const Mapa = () => {
           enableRotate
           zoomSpeed={1}
         />
-        {/* {aristas.map((arista, index) => (
+        {aristas.map((arista, index) => (
     <Aristas
       key={index}
       nodoOrigen={arista.nodoOrigen}
       nodoDestino={arista.nodoDestino}
     />
-  ))} */}
+  ))}
         {/* Modelo */}
         <Modelo archivo={'EscuelaColor.glb'} posicion={[0, 0, 0]} />
         {salonBuscado && (
