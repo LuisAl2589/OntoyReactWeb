@@ -7,11 +7,13 @@ import Landing from './pages/Landing';
 import Register from './pages/Register';
 import RegisterClass from './pages/RegisterClass';  
 import RegisterSchedule from './pages/RegisterSchedule';
+import AddUser from './pages/agregarClaseUser';
 import Mapa from './pages/Mapa';  // Importa tu componente de visualización de modelos
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthRoute } from './components/AuthRoute';
 import MapESCOM from './pages/MapESCOM';
 import AdminPanel from './pages/panelAdmin';
+
 
 
 function App() {
@@ -28,6 +30,7 @@ function App() {
             <Route path="/mapa" element={<Mapa />} />
             <Route path="/register-class" element={<RegisterClass />} /> 
             <Route path="/register-schedule" element={<RegisterSchedule />} /> 
+            <Route path="/user-class" element={<AddUser />} /> 
             <Route path="/admin" element={<AdminPanel />} /> 
           </Route>
 
