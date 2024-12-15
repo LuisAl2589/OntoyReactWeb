@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import './css/horario.css';
-import { fetchClasses } from '../api/schedule'; 
+import { fetchClassesComplet } from '../api/schedule'; 
 import {  agregarClaseAlHorario } from '../api/userHorario';
 
 const Schedule = () => {
@@ -13,7 +13,7 @@ const Schedule = () => {
     const loadClasses = async () => {
       try {
         console.log("Fetching classes from backend...");
-        const response = await fetchClasses(); // Obtenemos las clases desde el backend
+        const response = await fetchClassesComplet(); // Obtenemos las clases desde el backend
         console.log("Classes fetched successfully:", response);
         setClasses(response);
       } catch (error) {
@@ -57,8 +57,8 @@ const Schedule = () => {
         >
           <option value="">Selecciona una clase</option>
           {classes.map((clase) => (
-            <option key={clase.id} value={clase.id}>
-              {clase.nombre} - {clase.profesor}
+            <option key={clase.id_clase} value={clase.id_clase}>
+              {clase.nombre_clase} - {clase.profesor} - {clase.nombre_nodo}
             </option>
           ))}
         </select>

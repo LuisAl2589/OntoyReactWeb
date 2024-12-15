@@ -25,6 +25,15 @@ export const fetchClasses = async () => {
     throw error;
   }
 };
+export const fetchClassesComplet = async () => {
+  try {
+    const response = await api.get(`${API_URL}/clasesComp`);
+    return response.data;
+  } catch (error) {
+    console.error("Error al cargar las clases:", error);
+    throw error;
+  }
+};
 
 // Registrar un nuevo horario
 export const registerSchedule = async (data) => {
