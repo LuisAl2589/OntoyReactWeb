@@ -2,6 +2,7 @@
 import React from 'react';
 import './css/contactos.css';
 import AppNavbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 
 const contacts = [
@@ -61,6 +62,7 @@ const ContactPage = () => {
           </div>  
         </div>
       </header>
+      <Footer />
     </div>
   );
 };
