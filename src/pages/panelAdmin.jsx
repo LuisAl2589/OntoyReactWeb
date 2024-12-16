@@ -16,7 +16,7 @@ const AdminPanel = () => {
     return (
         <div className="container-fluid p-0 vw-100">
             <AppNavbar />
-            <div className='my-5  vh-100 vw-100'>
+            <div className='vh-100 vw-100'>
                 <h2>Admin Panel</h2>
                 <ul className="list-unstyled p-0">
                     <li

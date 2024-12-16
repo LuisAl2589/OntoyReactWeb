@@ -31,9 +31,6 @@ const AppNavbar = () => {
             <Nav.Link href="/sobre" className="mx-3">
               Sobre nosotros
             </Nav.Link>
-            <Nav.Link href="" className="mx-3">
-              Servicios
-            </Nav.Link>
             <Nav.Link href="/mapa" className="mx-3">
               Mapa
             </Nav.Link>
