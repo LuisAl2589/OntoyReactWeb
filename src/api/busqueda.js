@@ -10,3 +10,14 @@ export const buscarSalon = async (query) => {
     throw error;
   }
 }
+
+export const buscarHorarioClaseSalon = async (query) => {
+  try {
+    const response = await api.get(`/api/horarioClasesNodo?idNodo=${query}`);
+    
+    return response.data;
+  } catch (error) {
+    console.error("Error al buscar:", error.response ? error.response.data : error.message);
+    throw error;
+  }
+}

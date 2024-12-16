@@ -1,25 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { Button,Form , InputGroup,Dropdown} from 'react-bootstrap';
+import { Form, InputGroup, Dropdown } from 'react-bootstrap';
 import './css/buscador.css';
 import { buscarSalon } from '../api/busqueda';
 
-const Buscador = ({handleFunction}) => {
+const Buscador = ({ handleFunction, encabezado }) => {
     const [query, setQuery] = useState('');
     const [resultados, setResultados] = useState([]);
-    
-    
+    const [desplegar, setDesplegar] = useState(false);
 
     useEffect(() => {
+        
         const buscar = async (query) => {
             if (query === '') {
                 setResultados([]);
                 return;
             }
+            
             try {
                 const response = await buscarSalon(query);
                 setResultados(response.data);
-                console.log(response.data);
-                
             } catch (error) {
                 console.error(error);
             }
@@ -29,30 +28,40 @@ const Buscador = ({handleFunction}) => {
 
     const handleInputChange = (e) => {
         setQuery(e.target.value);
+        setDesplegar(true);
     };
 
     const handleSelect = (resultado) => {
-            handleFunction(resultado); // Llama la función del componente padre
-        
+        setResultados([]);
+        setQuery(resultado.nodo_nombre);
+        setDesplegar(false);
+        handleFunction(resultado);
     };
 
-
     return (
-        <div className='buscador'>
-            
-            <Dropdown.Menu variant='dark' show>
-                <Dropdown.Header>
-                    <Form.Control type="text" placeholder="Buscar salón..." value={query} onChange={handleInputChange} />
-                </Dropdown.Header>
-                {(resultados.length > 0) && (
-                    resultados.map((resultado) => (
-                        <Dropdown.Item key={resultado.nodo_nombre} onClick={() => handleSelect(resultado)}>
-                            {resultado.nodo_nombre}
-                        </Dropdown.Item>
-                    ))
+        <div className="buscador">
+            <InputGroup className="mb-3" style={{ position: "relative" }}>
+                <InputGroup.Text>{encabezado}</InputGroup.Text>
+                <Form.Control
+                    type="text"
+                    placeholder="Buscar salón..."
+                    value={query}
+                    onChange={handleInputChange}
+                />
+                {query && desplegar && (
+                    <Dropdown.Menu show variant="dark" style={{ position: "absolute", top: "100%", left: "0", zIndex: 1000, width: "100%" }}>
+                        {resultados.length > 0 ? (
+                            resultados.map((resultado) => (
+                                <Dropdown.Item key={resultado.nodo_nombre} onClick={() => handleSelect(resultado)}>
+                                    {resultado.nodo_nombre}
+                                </Dropdown.Item>
+                            ))
+                        ) : (
+                            <Dropdown.Item disabled>No hay resultados</Dropdown.Item>
+                        )}
+                    </Dropdown.Menu>
                 )}
-                
-            </Dropdown.Menu>
+            </InputGroup>
         </div>
     );
 };

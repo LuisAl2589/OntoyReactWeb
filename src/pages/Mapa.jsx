@@ -6,11 +6,13 @@ import { Vector3 } from 'three';
 import { obtenerNodos} from '../api/nodos';
 import { obtenerAristas} from '../api/aristas';
 import { obtenerRuta } from '../api/rutas';
+import { buscarHorarioClaseSalon } from '../api/busqueda';
+
 import Reloj from '../components/mapa/Reloj';
 import Marcador from '../components/mapa/Marcador';
 import Buscador from '../components/Buscador';
 import RutaArista from '../components/mapa/RutaArista';
-import { Modal, Button } from 'react-bootstrap';
+import { Modal, Button, Table } from 'react-bootstrap';
 import './css/mapa.css';
 
 const nodoOrigen = 64;
@@ -34,6 +36,7 @@ const Mapa = () => {
   const [ruta, setRuta] = useState([]);
   const [salonBuscado, setSalonBuscado] = useState(null);
   const [selectedNode, setSelectedNode] = useState(null);
+  const [horarioSelectNode, setHorarioSelectNode] = useState(null);
 
   const fetchData = useCallback(async () => {
     try {
@@ -57,11 +60,23 @@ const Mapa = () => {
   }, [fetchData]);
 
   const handleSalonBuscado = (salon) => setSalonBuscado(salon);
-  const handleClick = (nodo) => setSelectedNode(nodo);
+  const handleClick = (nodo) => {
+    handleHorarioSelectNode(nodo.id);
+    setSelectedNode(nodo)
+  };
+
+  const handleHorarioSelectNode = async (idNodo) => {
+    try {
+      const response = await buscarHorarioClaseSalon(idNodo);
+      setHorarioSelectNode(response.data);
+    } catch (error) {
+      console.error('Error al obtener el horario del nodo', error);
+    }
+  };
 
   return (
     <div className="mapa">
-      <Buscador handleFunction={handleSalonBuscado} className="buscador" />
+      <Buscador handleFunction={handleSalonBuscado} encabezado="Origen" />
 
       <Canvas
         style={{ height: '100vh', width: '100vw', backgroundColor: 'rgba(0,0,0)' }}
@@ -121,15 +136,37 @@ const Mapa = () => {
       <Reloj className="reloj" />
 
       {selectedNode && (
-        <Modal show={true} onHide={() => setSelectedNode(null)}>
+        <Modal size="lg" show={true} onHide={() => setSelectedNode(null)}
+          
+          aria-labelledby="example-custom-modal-styling-title"
+        >
           <Modal.Header>
-            <Modal.Title>Información del Nodo Seleccionado</Modal.Title>
+            <Modal.Title>Horario del salón {selectedNode.nombre}</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <p>Coordenadas: ({selectedNode.coordenadaX}, {selectedNode.coordenadaY}, {selectedNode.coordenadaZ})</p>
-            <p>Numero: {selectedNode.nombre}</p>
-            <p>Tipo: {selectedNode.tipo}</p>
-            <p>Id: {selectedNode.id}</p>
+            <Table striped hover responsive >
+              <thead>
+                <tr>
+                  <th>Clase</th>
+                  <th>Profesor</th>
+                  <th>Día</th>
+                  <th>Hora Inicio</th>
+                  <th>Hora Fin</th>
+                </tr>
+              </thead>
+              <tbody>
+                {horarioSelectNode &&
+                  horarioSelectNode.map((horario, index) => (
+                    <tr key={index}>
+                      <td>{horario.clase}</td>
+                      <td>{horario.profesor}</td>
+                      <td>{horario.dia}</td>
+                      <td>{horario.hora_inicio}</td>
+                      <td>{horario.hora_fin}</td>
+                    </tr>
+                  ))}
+              </tbody>
+            </Table>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="primary" onClick={() => setSelectedNode(null)}>
