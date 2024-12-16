@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import './css/horario.css';
 import { registerSchedule, fetchClasses } from '../api/schedule';
 import { obtenerNodos } from '../api/nodos';
+import AppNavbar from '../components/Navbar';
+import Footer from '../components/Footer';
 
 const RegisterSchedule = () => {
     const [formData, setFormData] = useState({
@@ -65,7 +67,11 @@ const RegisterSchedule = () => {
     };
 
     return (
-        <div className="register-container">
+        <div className="w-100">
+            <AppNavbar />
+            <header className='hero-section'>
+                <div className='chart-hero'>
+                <div className="register-container">
             <h2>Registro de Horario</h2>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             <form onSubmit={handleSubmit}>
@@ -143,6 +149,10 @@ const RegisterSchedule = () => {
                 </div>
                 <button type="submit">Registrar Horario</button>
             </form>
+        </div>
+                </div>
+            </header>
+            <Footer />
         </div>
     );
 };

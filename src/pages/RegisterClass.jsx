@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useEffect } from 'react';
 import './css/register.css';
+import AppNavbar from '../components/Navbar';
+import Footer from '../components/Footer';
 import { registerClass } from '../api/schedule';
 
 const RegisterClass = () => {
@@ -51,7 +53,11 @@ const RegisterClass = () => {
     }, []);
 
     return (
-        <div className="register-container">
+        <div className="w-100">
+            <AppNavbar />
+            <header className='hero-section'>
+                <div className='chart-hero'>
+                <div className="register-container">
             <h2>Registro de Clase</h2>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
             <form onSubmit={handleSubmit}>
@@ -79,6 +85,10 @@ const RegisterClass = () => {
                 </div>
                 <button type="submit">Registrar Clase</button>
             </form>
+        </div>
+                </div>
+            </header>
+            <Footer />
         </div>
     );
 };
