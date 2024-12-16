@@ -3,8 +3,8 @@ import { Line, OrbitControls, Grid } from '@react-three/drei';
 import { Modelo } from '../components/mapa/Modelo';
 import React, { useState, useEffect, useCallback } from 'react';
 import { Vector3 } from 'three';
-import { obtenerNodos} from '../api/nodos';
-import { obtenerAristas} from '../api/aristas';
+import { obtenerNodos } from '../api/nodos';
+import { obtenerAristas } from '../api/aristas';
 import { obtenerRuta } from '../api/rutas';
 import Reloj from '../components/mapa/Reloj';
 import Marcador from '../components/mapa/Marcador';
@@ -65,7 +65,7 @@ const Mapa = () => {
         style={{ height: '100vh', width: '100vw', backgroundColor: 'rgba(0,0,0)' }}
         camera={{ position: [-10, 150, 0], fov: 50 }}
       >
-        {nodos.map((nodo, index) => (
+        {nodos.filter(nodo => nodo.tipo !== '').map((nodo, index) => (
           <Marcador
             key={index}
             position={[nodo.coordenadaX, nodo.coordenadaY, nodo.coordenadaZ]}
@@ -91,12 +91,12 @@ const Mapa = () => {
           zoomSpeed={1}
         />
         {aristas.map((arista, index) => (
-    <Aristas
-      key={index}
-      nodoOrigen={arista.nodoOrigen}
-      nodoDestino={arista.nodoDestino}
-    />
-  ))}
+          <Aristas
+            key={index}
+            nodoOrigen={arista.nodoOrigen}
+            nodoDestino={arista.nodoDestino}
+          />
+        ))}
         {/* Modelo */}
         <Modelo archivo={'EscuelaColor.glb'} posicion={[0, 0, 0]} />
         {salonBuscado && (

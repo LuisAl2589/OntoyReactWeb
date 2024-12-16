@@ -5,14 +5,10 @@ import Landing from './pages/Landing';
 import Register from './pages/Register';
 import RegisterClass from './pages/RegisterClass';  
 import RegisterSchedule from './pages/RegisterSchedule';
-<<<<<<< HEAD
-import Mapa from './pages/Mapa';
-=======
 import AddUser from './pages/agregarClaseUser';
 import Horario from './pages/HorarioPerso';
 import EditClass from './pages/EditarClase';
 import Mapa from './pages/Mapa';  // Importa tu componente de visualización de modelos
->>>>>>> armandoAce
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { AuthRoute } from './components/AuthRoute';
 import MapESCOM from './pages/MapESCOM';
@@ -38,21 +34,8 @@ function App() {
           <Route element={<AuthRoute type="public" />}>
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
-<<<<<<< HEAD
-=======
             
           </Route>
-          <Route element={<AuthRoute type="protected" />}>
-            <Route path="/mapa" element={<Mapa />} />
-            <Route path="/register-class" element={<RegisterClass />} /> 
-            <Route path="/register-schedule" element={<RegisterSchedule />} /> 
-            <Route path="/user-class" element={<AddUser />} /> 
-            <Route path="/horario" element={<Horario />} /> 
-            <Route path="/editar-clase/:id_clase" element={<EditClass />} /> 
-            <Route path="/admin" element={<AdminPanel />} /> 
->>>>>>> armandoAce
-          </Route>
-
           {/* Rutas protegidas */}
           <Route element={<AuthRoute type="protected" />}>
             {/* Ruta para Mapa con pantalla de carga */}
@@ -63,6 +46,8 @@ function App() {
             <Route path="/register-class" element={<RegisterClass />} />
             <Route path="/register-schedule" element={<RegisterSchedule />} />
             <Route path="/admin" element={<AdminPanel />} />
+            <Route path="/user-class" element={<AddUser />} /> 
+            <Route path="/horario" element={<Horario />} /> 
             <Route path="/admin/listaUsuarios" element={<ListaUsuarios />} />
             <Route path="/admin/editarUsuario/:boleta" element={<EditarUsuario />} />
           </Route>
