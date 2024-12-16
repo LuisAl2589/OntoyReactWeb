@@ -11,6 +11,7 @@ import { buscarHorarioClaseSalon } from '../api/busqueda';
 import Reloj from '../components/mapa/Reloj';
 import Marcador from '../components/mapa/Marcador';
 import Buscador from '../components/Buscador';
+
 import RutaArista from '../components/mapa/RutaArista';
 import { Modal, Button, Table } from 'react-bootstrap';
 import './css/mapa.css';
@@ -35,6 +36,10 @@ const Mapa = () => {
   const [aristas, setAristas] = useState([]);
   const [ruta, setRuta] = useState([]);
   const [salonBuscado, setSalonBuscado] = useState(null);
+  const [salonBuscado2, setSalonBuscado2] = useState(null);
+  
+
+
   const [selectedNode, setSelectedNode] = useState(null);
   const [horarioSelectNode, setHorarioSelectNode] = useState(null);
 
@@ -43,7 +48,7 @@ const Mapa = () => {
       const [nodosData, aristasData, rutaData] = await Promise.all([
         obtenerNodos(),
         obtenerAristas(),
-        //obtenerRuta(nodoOrigen, nodoDestino),
+        //obtenerRuta(salonBuscado.id, salonBuscado2.id),
       ]);
       console.log(nodosData);
       
@@ -60,6 +65,25 @@ const Mapa = () => {
   }, [fetchData]);
 
   const handleSalonBuscado = (salon) => setSalonBuscado(salon);
+  const handleSalonBuscado2 = (salon2) => setSalonBuscado2(salon2);
+
+  const handleRuta = async () => {
+    try {
+      const response = await obtenerRuta(salonBuscado.id, salonBuscado2.id);
+      console.log(response.ruta);
+      setRuta(response.ruta);
+    } catch (error) {
+      console.error('Error al obtener la ruta', error);
+    }
+  };
+
+  
+
+
+
+
+
+
   const handleClick = (nodo) => {
     handleHorarioSelectNode(nodo.id);
     setSelectedNode(nodo)
@@ -76,7 +100,11 @@ const Mapa = () => {
 
   return (
     <div className="mapa">
-      <Buscador handleFunction={handleSalonBuscado} encabezado="Origen" />
+    
+        <Buscador handleFunction={handleSalonBuscado} handleFunction2={handleSalonBuscado2} handleGenerar={handleRuta} />
+        
+
+
 
       <Canvas
         style={{ height: '100vh', width: '100vw', backgroundColor: 'rgba(0,0,0)' }}
@@ -110,13 +138,7 @@ const Mapa = () => {
           enableRotate
           zoomSpeed={1}
         />
-        {aristas.map((arista, index) => (
-    <Aristas
-      key={index}
-      nodoOrigen={arista.nodoOrigen}
-      nodoDestino={arista.nodoDestino}
-    />
-  ))}
+        
         {/* Modelo */}
         <Modelo archivo={'ESCUELA.glb'} posicion={[0, 0, 0]} />
         {salonBuscado && (
@@ -124,6 +146,14 @@ const Mapa = () => {
             coordenadaX={salonBuscado.coordenadaX}
             coordenadaY={salonBuscado.coordenadaY + 2.5}
             coordenadaZ={salonBuscado.coordenadaZ}
+          />
+        )}
+
+        {salonBuscado2 && (
+          <NodoBuscado
+            coordenadaX={salonBuscado2.coordenadaX}
+            coordenadaY={salonBuscado2.coordenadaY + 2.5}
+            coordenadaZ={salonBuscado2.coordenadaZ}
           />
         )}
 

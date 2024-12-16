@@ -12,8 +12,8 @@ const Landing = () => {
             <header className='hero-section'>
                 <div className='chart-hero'>
                     <h1>¡Bienvenido a OnToy!</h1>
-                    <p>Plataforma para encontrarte o algo asia</p>
-                    <button className="btn btn-primary">Iniciar Sesión</button>
+                    <p>Plataforma para ubicarte en la ESCOM</p>
+                    
                 </div>
             </header>
             <Footer />
