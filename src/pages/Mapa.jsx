@@ -3,8 +3,8 @@ import { Line, OrbitControls, Grid } from '@react-three/drei';
 import { Modelo } from '../components/mapa/Modelo';
 import React, { useState, useEffect, useCallback } from 'react';
 import { Vector3 } from 'three';
-import { obtenerNodos } from '../api/nodos';
-import { obtenerAristas } from '../api/aristas';
+import { obtenerNodos} from '../api/nodos';
+import { obtenerAristas} from '../api/aristas';
 import { obtenerRuta } from '../api/rutas';
 import Reloj from '../components/mapa/Reloj';
 import Marcador from '../components/mapa/Marcador';
@@ -40,11 +40,13 @@ const Mapa = () => {
       const [nodosData, aristasData, rutaData] = await Promise.all([
         obtenerNodos(),
         obtenerAristas(),
-        obtenerRuta(nodoOrigen, nodoDestino),
+        //obtenerRuta(nodoOrigen, nodoDestino),
       ]);
+      console.log(nodosData);
+      
       setNodos(nodosData);
       setAristas(aristasData);
-      setRuta(rutaData.ruta);
+      //setRuta(rutaData.ruta);
     } catch (error) {
       console.error('Error al cargar los datos', error);
     }
@@ -65,7 +67,7 @@ const Mapa = () => {
         style={{ height: '100vh', width: '100vw', backgroundColor: 'rgba(0,0,0)' }}
         camera={{ position: [-10, 150, 0], fov: 50 }}
       >
-        {nodos.filter(nodo => nodo.tipo !== '').map((nodo, index) => (
+        {nodos.map((nodo, index) => (
           <Marcador
             key={index}
             position={[nodo.coordenadaX, nodo.coordenadaY, nodo.coordenadaZ]}
@@ -75,11 +77,14 @@ const Mapa = () => {
             onClick={() => handleClick(nodo)}
           />
         ))}
+        
 
         {/* Luces para iluminar la escena */}
-        <ambientLight intensity={0.3} />
+        <ambientLight intensity={1.5} />
+        <ambientLight color={"white"} intensity={0.5} />
         <directionalLight position={[5, 5, 5]} />
         <directionalLight position={[-5, -5, -5]} />
+        
 
         {/* Controles de la cámara */}
         <OrbitControls
@@ -91,12 +96,12 @@ const Mapa = () => {
           zoomSpeed={1}
         />
         {aristas.map((arista, index) => (
-          <Aristas
-            key={index}
-            nodoOrigen={arista.nodoOrigen}
-            nodoDestino={arista.nodoDestino}
-          />
-        ))}
+    <Aristas
+      key={index}
+      nodoOrigen={arista.nodoOrigen}
+      nodoDestino={arista.nodoDestino}
+    />
+  ))}
         {/* Modelo */}
         <Modelo archivo={'ESCUELA.glb'} posicion={[0, 0, 0]} />
         {salonBuscado && (
