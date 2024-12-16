@@ -2,17 +2,42 @@ import { useState } from 'react';
 import { useEffect } from 'react';
 
 import './css/register.css';
-import { editarUsuario } from '../api/auth';
+import { getUsuario, editarUsuario } from '../api/users';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 const EditarUsuario = () => {
+    const navigate = useNavigate();
+
+    const { boleta } = useParams();
+    const [idUser, setIdUser] = useState('');
     const [formData, setFormData] = useState({
-        boleta: '',
-        email: '',
-        password: '',
+        id: '',
         nombre: '',
         appat: '',
-        apmat: ''
+        apmat: '',
+        email: '',
+        password: '',
+        boleta: '',
+        rol: '0'
     });
+
+    useEffect(() => {
+        const obtenerUsuario = async () => {
+            try {
+                const data = await getUsuario(boleta);
+                data[0].password = '';
+                setIdUser(data[0].id);
+                setFormData(data[0]);
+
+            } catch (error) {
+                console.error('Error al obtener usuario', error);
+            }
+        };
+        
+        obtenerUsuario();
+    },[]);
+
     
     const [errorMessage, setErrorMessage] = useState('');
 
@@ -28,8 +53,8 @@ const EditarUsuario = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const data = await editarUsuario(formData);
-            console.log('Usuario registrado:', data);
+            const data = await editarUsuario(formData,idUser);
+            navigate(`/admin/listaUsuarios`);
             setErrorMessage('');
         } catch (error) {
             console.error('Error en el registro', error);
@@ -49,7 +74,7 @@ const EditarUsuario = () => {
 
     return (
         <div className="register-container">
-            <h2>Registro</h2>
+            <h2>Editar Usuario</h2>
             {errorMessage && <p className="error-message">{errorMessage}</p>} {}
             <form onSubmit={handleSubmit}>
                 <div>
@@ -115,13 +140,12 @@ const EditarUsuario = () => {
                         name="password"
                         value={formData.password}
                         onChange={handleChange}
-                        required
                     />
                 </div>
-                <button type="submit">Registrar</button>
+                <button type="submit">Guardar</button>
             </form>
         </div>
     );
 };
 
-export default Register;
+export default EditarUsuario;

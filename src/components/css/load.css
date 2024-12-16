@@ -1,0 +1,55 @@
+/* Estilos para la página de carga */
+.load-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw; 
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #001F3F, #003366, #004080, #003366, #003366);
+  z-index: 9999;
+  color: #ffffff;
+  font-family: Arial, sans-serif;
+}
+
+.loader {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #ddd;
+  border-top: 6px solid #ffffff;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 15px;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+p {
+  font-size: 18px;
+  margin: 0;
+}
+
+/* Barra de progreso personalizada */
+.progress-bar {
+  width: 80%;        /* Barra ocupa el 80% del contenedor */
+  max-width: 500px;  /* Máximo tamaño de 500px */
+  height: 25px;      /* Aumentamos la altura de la barra */
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Sombra para efecto de profundidad */
+  border-radius: 12px; /* Bordes redondeados */
+}
+
+/* Personalizar el fondo de la barra */
+.progress-bar-animated {
+  background: linear-gradient(#4caf50, #81c784);  /* Gradiente verde para la barra */
+}
+

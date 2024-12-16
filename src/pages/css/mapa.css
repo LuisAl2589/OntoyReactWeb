@@ -1,0 +1,16 @@
+.mapa{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.buscador{
+    position: fixed;
+    width: 20%;
+    z-index: 1;
+    
+}
+
+.reloj{
+    position: fixed;
+}
