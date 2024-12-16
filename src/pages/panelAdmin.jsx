@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import AppNavbar from '../components/Navbar';
+import Footer from '../components/Footer';
+
 import './css/adminPanel.css';
 
 const AdminPanel = () => {
@@ -35,14 +37,23 @@ const AdminPanel = () => {
                         Settings
                     </li>
                 </ul>
+                {/* Main Content */}
+                <div style={{ padding: '20px' }}>
+                    {activeSection === 'dashboard' && <Dashboard />}
+                    {activeSection === 'users' && <ManageUsers />}
+                    {activeSection === 'settings' && <Settings />}
+                </div>
+                {/* Buttons */}
+                <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
+                    <button>
+                        Editar Usuarios
+                    </button>
+                    <button>
+                        Ver Lista de Usuarios
+                    </button>
+                </div>
             </div>
-
-            {/* Main Content */}
-            <div style={{ flex: 1, padding: '20px' }}>
-                {activeSection === 'dashboard' && <Dashboard />}
-                {activeSection === 'users' && <ManageUsers />}
-                {activeSection === 'settings' && <Settings />}
-            </div>
+            <Footer/>
         </div>
     );
 };
