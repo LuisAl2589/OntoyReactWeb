@@ -16,7 +16,7 @@ const AppNavbar = () => {
     };
 
     return (
-    <Navbar expand="xl" variant="dark" className="navbar">
+    <Navbar expand="xl" variant="dark" className="navbar w-100">
       <Container fluid>
         <Navbar.Brand href="#">
           <img src="/src/assets/img/Logo.svg" alt="Ontoy" height="30" />
@@ -28,16 +28,13 @@ const AppNavbar = () => {
             <Nav.Link href="#" className="active">
               Inicio
             </Nav.Link>
-            <Nav.Link href="" className="mx-3">
+            <Nav.Link href="/sobre" className="mx-3">
               Sobre nosotros
-            </Nav.Link>
-            <Nav.Link href="" className="mx-3">
-              Servicios
             </Nav.Link>
             <Nav.Link href="/mapa" className="mx-3">
               Mapa
             </Nav.Link>
-            <Nav.Link href="" className="mx-3">
+            <Nav.Link href="/contactos" className="mx-3">
               Contacto
             </Nav.Link>
           </Nav>

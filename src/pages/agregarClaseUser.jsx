@@ -1,7 +1,10 @@
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './css/horario.css';
+import AppNavbar from '../components/Navbar'; // Navbar
+import Footer from '../components/Footer'; // Footer
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { fetchClassesComplet } from '../api/schedule'; 
-import {  agregarClaseAlHorario } from '../api/userHorario';
+import { agregarClaseAlHorario } from '../api/userHorario';
 
 const Schedule = () => {
   const [classes, setClasses] = useState([]);
@@ -44,29 +47,41 @@ const Schedule = () => {
   };
 
   return (
-    <div className="schedule-container">
-      <h2>Selecciona una clase para agregar a tu horario</h2>
+    <div className='w-100 vh-100'>
+        <AppNavbar />
+        <div className='vh-100 d-flex align-content-center flex-nowrap'>
+    <div className="register-container vh-75 ">
 
-      {message && <p className="message">{message}</p>}
+      {/* Contenido principal */}
+      <main className="schedule-container">
+        <h2>Selecciona una clase para agregar a tu horario</h2>
 
-      <div>
-        <select
-          value={selectedClass || ""}
-          onChange={(e) => setSelectedClass(e.target.value)}
-          className="class-select"
-        >
-          <option value="">Selecciona una clase</option>
-          {classes.map((clase) => (
-            <option key={clase.id_clase} value={clase.id_clase}>
-              {clase.nombre_clase} - {clase.profesor} - {clase.nombre_nodo}
-            </option>
-          ))}
-        </select>
+        {message && <p className="message alert alert-info">{message}</p>}
+
+        <div>
+          <select
+            value={selectedClass || ""}
+            onChange={(e) => setSelectedClass(e.target.value)}
+            className="class-select"
+          >
+            <option value="">Selecciona una clase</option>
+            {classes.map((clase) => (
+              <option key={clase.id_clase} value={clase.id_clase}>
+                {clase.nombre_clase} - {clase.profesor} - {clase.nombre_nodo}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <button onClick={handleAddClass} className="add-class-button">
+          Agregar clase
+        </button>
+      </main>
+
+      {/* Footer */}
       </div>
-
-      <button onClick={handleAddClass} className="add-class-button">
-        Agregar clase
-      </button>
+      </div>
+    <Footer />
     </div>
   );
 };

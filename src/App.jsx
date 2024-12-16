@@ -15,6 +15,8 @@ import MapESCOM from './pages/MapESCOM';
 import AdminPanel from './pages/panelAdmin';
 import ListaUsuarios from './pages/ListaUsuarios';
 import EditarUsuario from './pages/EditarUsuario';
+import SobreNosotros from './pages/SobreNosotros';
+import Contactos from './pages/Contactos';
 import LoadPage from './components/LoadPage';
 
 
@@ -45,6 +47,7 @@ function App() {
             />
             <Route path="/register-class" element={<RegisterClass />} />
             <Route path="/register-schedule" element={<RegisterSchedule />} />
+            <Route path="/editar-clase/:id_clase" element={<EditClass />} />
             <Route path="/admin" element={<AdminPanel />} />
             <Route path="/user-class" element={<AddUser />} /> 
             <Route path="/horario" element={<Horario />} /> 
@@ -55,6 +58,8 @@ function App() {
           {/* Otras rutas */}
           <Route path="/" element={<Landing />} />
           <Route path="/mapas" element={<MapESCOM />} />
+          <Route path="/sobre" element={<SobreNosotros />} />
+          <Route path="/contactos" element={<Contactos />} />
         </Routes>
       </Router>
     </div>

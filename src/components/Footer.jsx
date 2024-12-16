@@ -3,7 +3,7 @@ import './css/footer.css'; // Asegúrate de tener un archivo CSS correspondiente
 
 const Footer = () => {
     return (
-        <footer className="text-center text-lg-start bg-body-tertiary footer">
+        <footer className="text-center text-lg-start bg-body-tertiary footer w-100">
             <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
                 <div className="me-5 d-none d-lg-block">
                     <span>Contactanos en nuestras redes sociales</span>
@@ -38,7 +38,8 @@ const Footer = () => {
                                 <i className="fas fa-gem me-3"></i>Nombre de compañia que aun no tenemosxd
                             </h6>
                             <p>
-                                Descripcion de la empresa que aun no se
+                                ONToy es una empresa innovadora dedicada a la creación de herramientas tecnológicas que
+                                hacen la vida más sencilla y accesible.
                             </p>
                         </div>
                         <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">

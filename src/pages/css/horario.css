@@ -23,7 +23,15 @@ body {
     border-radius: 2rem;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1); /* Sombra del formulario */
 }
-
+.class-name-link {
+    cursor: pointer;
+    color: blue;
+    text-decoration: underline;
+  }
+  
+  .class-name-link:hover {
+    color: darkblue;
+  }
 .register-container h2 {
     font-size: 2.2rem;
     color: #333;

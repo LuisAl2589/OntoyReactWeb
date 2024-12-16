@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
+import AppNavbar from '../components/Navbar'; // Importar Navbar
+import Footer from '../components/Footer'; // Importar Footer
 import { fetchClassesComplet } from '../api/schedule'; // Para obtener las clases disponibles
 import { editarClaseEnHorario } from '../api/userHorario'; // Para actualizar la clase del usuario
 
@@ -15,6 +17,7 @@ const EditarClaseUsuario = () => {
 
   // Cargar las clases disponibles
   useEffect(() => {
+    document.body.style.backgroundColor = '#35ace4';
     const loadClasses = async () => {
       try {
         const response = await fetchClassesComplet();  // Obtiene todas las clases disponibles
@@ -66,7 +69,11 @@ const EditarClaseUsuario = () => {
   };
 
   return (
-    <div className="editar-clase-container">
+    <div className='w-100 vh-100'>
+        <AppNavbar />
+        <div className='vh-100 d-flex align-content-center flex-nowrap'>
+    <div className="register-container vh-75 ">
+
       <h2>Editar Clase: {classDetails ? classDetails.nombre_clase : 'Cargando...'}</h2>
 
       {message && <p className="success-message">{message}</p>}
@@ -91,6 +98,11 @@ const EditarClaseUsuario = () => {
 
         <button type="submit">Actualizar Clase</button>
       </form>
+
+      {/* Footer */}
+      </div>
+      </div>
+    <Footer />
     </div>
   );
 };
