@@ -47,6 +47,7 @@ function App() {
             />
             <Route path="/register-class" element={<RegisterClass />} />
             <Route path="/register-schedule" element={<RegisterSchedule />} />
+            <Route path="/editar-clase/:id_clase" element={<EditClass />} />
             <Route path="/admin" element={<AdminPanel />} />
             <Route path="/user-class" element={<AddUser />} /> 
             <Route path="/horario" element={<Horario />} /> 
