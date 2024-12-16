@@ -25,6 +25,8 @@ const RegisterSchedule = () => {
             } catch (error) {
                 console.error("Error al cargar las nodos", error);
                 setErrorMessage("No se pudieron cargar las Nodos");
+                setSuccessMessage("Horario registrado con exito");
+
             }
         };
         const loadClasses = async () => {
