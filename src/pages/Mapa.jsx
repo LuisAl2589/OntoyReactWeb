@@ -98,7 +98,7 @@ const Mapa = () => {
           />
         ))}
         {/* Modelo */}
-        <Modelo archivo={'EscuelaColor.glb'} posicion={[0, 0, 0]} />
+        <Modelo archivo={'ESCUELA.glb'} posicion={[0, 0, 0]} />
         {salonBuscado && (
           <NodoBuscado
             coordenadaX={salonBuscado.coordenadaX}
