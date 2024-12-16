@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import AppNavbar from '../components/Navbar';
 import Footer from '../components/Footer';
 
+import './css/adminPanel.css';
+
 const AdminPanel = () => {
     const navigate = useNavigate();
     const [activeSection, setActiveSection] = useState('dashboard');
@@ -36,13 +38,23 @@ const AdminPanel = () => {
                         Settings
                     </li>
                 </ul>
-                <div className="p-3">
+                {/* Main Content */}
+                <div style={{ padding: '20px' }}>
                     {activeSection === 'dashboard' && <Dashboard />}
                     {activeSection === 'users' && <ManageUsers />}
                     {activeSection === 'settings' && <Settings />}
                 </div>
+                {/* Buttons */}
+                <div style={{ marginTop: '20px', display: 'flex', gap: '10px' }}>
+                    <button>
+                        Editar Usuarios
+                    </button>
+                    <button>
+                        Ver Lista de Usuarios
+                    </button>
+                </div>
             </div>
-            <Footer />
+            <Footer/>
         </div>
     );
 };

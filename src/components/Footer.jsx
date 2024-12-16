@@ -38,7 +38,8 @@ const Footer = () => {
                                 <i className="fas fa-gem me-3"></i>Nombre de compañia que aun no tenemosxd
                             </h6>
                             <p>
-                                Descripcion de la empresa que aun no se
+                                ONToy es una empresa innovadora dedicada a la creación de herramientas tecnológicas que
+                                hacen la vida más sencilla y accesible.
                             </p>
                         </div>
                         <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
