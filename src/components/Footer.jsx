@@ -3,7 +3,7 @@ import './css/footer.css'; // Asegúrate de tener un archivo CSS correspondiente
 
 const Footer = () => {
     return (
-        <footer className="text-center text-lg-start bg-body-tertiary footer">
+        <footer className="text-center text-lg-start bg-body-tertiary footer w-100">
             <section className="d-flex justify-content-center justify-content-lg-between p-4 border-bottom">
                 <div className="me-5 d-none d-lg-block">
                     <span>Contactanos en nuestras redes sociales</span>
