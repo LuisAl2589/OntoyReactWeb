@@ -16,7 +16,7 @@ const AppNavbar = () => {
     };
 
     return (
-    <Navbar expand="xl" variant="dark" className="navbar">
+    <Navbar expand="xl" variant="dark" className="navbar w-100">
       <Container fluid>
         <Navbar.Brand href="#">
           <img src="/src/assets/img/Logo.svg" alt="Ontoy" height="30" />
