@@ -1,0 +1,71 @@
+/* AboutUsPage.css */
+  .hero {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      height: 100vh;
+      background: linear-gradient(135deg, #001F3F, #003366, #004080, #003366, #003366);
+  }
+  
+  /* Styles for elements inside the chart */
+
+.chart {
+  max-width: 80%;
+  margin: 0 auto;
+  margin-top: 50px;
+  padding: 15px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.chart h1 {
+  font-size: 2.5rem;
+  color: #003366;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.chart p {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.chart section {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.chart h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.chart .mission-vision {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.chart .mission, .chart .vision {
+  padding: 15px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chart .mission h3, .chart .vision h3 {
+  font-size: 1.5rem;
+  color: #003366;
+  margin-bottom: 8px;
+}
+
+.chart .mission p, .chart .vision p {
+  font-size: 1rem;
+  color: #555;
+}

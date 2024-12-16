@@ -28,7 +28,7 @@ const AppNavbar = () => {
             <Nav.Link href="#" className="active">
               Inicio
             </Nav.Link>
-            <Nav.Link href="" className="mx-3">
+            <Nav.Link href="/sobre" className="mx-3">
               Sobre nosotros
             </Nav.Link>
             <Nav.Link href="" className="mx-3">
@@ -37,7 +37,7 @@ const AppNavbar = () => {
             <Nav.Link href="/mapa" className="mx-3">
               Mapa
             </Nav.Link>
-            <Nav.Link href="" className="mx-3">
+            <Nav.Link href="/contactos" className="mx-3">
               Contacto
             </Nav.Link>
           </Nav>

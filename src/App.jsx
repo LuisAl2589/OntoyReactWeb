@@ -12,6 +12,8 @@ import MapESCOM from './pages/MapESCOM';
 import AdminPanel from './pages/panelAdmin';
 import ListaUsuarios from './pages/ListaUsuarios';
 import EditarUsuario from './pages/EditarUsuario';
+import SobreNosotros from './pages/SobreNosotros';
+import Contactos from './pages/Contactos';
 import LoadPage from './components/LoadPage';
 
 function App() {
@@ -49,6 +51,8 @@ function App() {
           {/* Otras rutas */}
           <Route path="/" element={<Landing />} />
           <Route path="/mapas" element={<MapESCOM />} />
+          <Route path="/sobre" element={<SobreNosotros />} />
+          <Route path="/contactos" element={<Contactos />} />
         </Routes>
       </Router>
     </div>

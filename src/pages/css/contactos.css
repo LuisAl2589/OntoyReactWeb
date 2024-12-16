@@ -1,0 +1,83 @@
+/* AboutUsPage.css */
+.hero-2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #001F3F, #003366, #004080, #003366, #003366);
+}
+
+/* ContactPage.css */
+
+.chart-2 {
+  padding: 20px;
+  background-color: #fefefe;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 1200px;
+  margin: 20px auto;
+}
+
+.contact-page-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
+}
+
+.contact-header {
+  text-align: center;
+}
+
+.contact-header h1 {
+  font-size: 2.5rem;
+  color: #003366;
+  margin-bottom: 10px;
+}
+
+.contact-header p {
+  font-size: 1.2rem;
+  color: #555;
+  margin: 0;
+}
+
+.contact-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.contact-card {
+  flex: 1 1 calc(45% - 20px);
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.contact-card:hover {
+  transform: translateY(-5px);
+}
+
+.contact-card h2 {
+  font-size: 1.8rem;
+  color: #003366;
+  margin-bottom: 10px;
+}
+
+.contact-card p {
+  font-size: 1rem;
+  color: #555;
+  margin: 5px 0;
+}
+
+.contact-card a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.contact-card a:hover {
+  text-decoration: underline;
+}
