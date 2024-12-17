@@ -3,7 +3,7 @@ import AppNavbar from '../components/Navbar'; // Importar Navbar
 import Footer from '../components/Footer'; // Importar Footer
 import './css/register.css'; // Estilos
 import { registerClass } from '../api/schedule'; // Función para registrar clase
-import { Button } from 'react-bootstrap'; // Usar Button de react-bootstrap
+import { Button, Nav } from 'react-bootstrap'; // Usar Button de react-bootstrap
 import { useNavigate } from 'react-router-dom'; // Para la navegación
 
 const RegisterClass = () => {
@@ -55,9 +55,7 @@ const RegisterClass = () => {
     }, []);
 
     return (
-        <div className='w-100 vh-100'>
-            <AppNavbar />
-            <div className='vh-100 d-flex align-content-center flex-nowrap'>
+                <>
                 <div className="register-container h-50 ">
                     {/* Navbar */}
 
@@ -108,9 +106,7 @@ const RegisterClass = () => {
                     {/* Footer */}
 
                 </div>
-            </div>
-            <Footer />
-        </div>
+                </>
     );
 };
 

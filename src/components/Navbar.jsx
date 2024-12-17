@@ -37,6 +37,9 @@ const AppNavbar = () => {
             <Nav.Link href="/contactos" className="mx-3">
               Contacto
             </Nav.Link>
+            <Nav.Link href="/admin" className="mx-3">
+              Admin
+            </Nav.Link>
           </Nav>
           <Nav>
             {isLoggedIn ? (

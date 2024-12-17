@@ -82,9 +82,9 @@ const RegisterSchedule = () => {
     };
 
     return (
-        <div className='w-100 vh-100'>
-            <AppNavbar />
-            <div className='vh-100 d-flex align-content-center flex-nowrap'>
+     
+            
+            <div className=' d-flex align-content-center flex-nowrap'>
                 <div className="register-container vh-75">
                     <h2>Registro de Horario</h2>
 
@@ -173,8 +173,7 @@ const RegisterSchedule = () => {
                     {/* Footer */}
                 </div>
             </div>
-            <Footer />
-        </div>
+        
     );
 };
 
